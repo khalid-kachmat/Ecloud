@@ -1,0 +1,160 @@
+main {
+    position: relative;
+    z-index: 1;
+    width: auto;
+    background-color: rgb(243, 243, 243);
+    margin-left: 8rem;
+    border-radius: 40px 40px 40px;
+    overflow-x: hidden;
+}
+
+.navbar {
+    opacity: 1;
+    background-color: rgb(209, 213, 219);
+    width: 20rem;
+    height: 100vh;
+    position: fixed;
+    transition: 300ms ease;
+}
+
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+
+}
+
+.nav-item {
+    width: 100%;
+}
+
+
+.social i.fab {
+    font-size: 3em;
+    color: black;
+}
+
+.nav-item:last-child {
+    margin-top: auto;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link svg {
+    width: 3em;
+    min-width: 3rem;
+    margin: 0 2.5rem;
+    height: 2em;
+}
+
+.navbar:hover {
+    width: 20rem;
+    transition: 300ms ease;
+}
+
+
+.nav-link .fab {
+    font-size: 2rem;
+}
+
+.nav-link .far {
+    font-size: 2rem;
+    margin: 0 1.5rem;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.link-text {
+    display: none;
+    margin-left: 1rem;
+}
+
+.navbar:hover .link-text {
+    display: block;
+}
+
+.logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+    letter-spacing: 0.3ch;
+}
+
+.link-text {
+    display: none;
+}
+
+.user {
+    margin-right: 11em;
+}
+
+
+
+h1 {
+    width: 80%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px solid #000;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+h1 span {
+    background: #F3F3F3FF;
+    padding: 5px 20px;
+    border-radius: 12px;
+
+
+}
+
+
+.table-bg {
+    background-color: #F2F2F2;
+}
+
+.table {
+    border-spacing: 0 15px;
+}
+
+i {
+    font-size: 1rem !important;
+}
+
+.table tr {
+    border-radius: 20px;
+}
+
+tr td:nth-child(n+5),
+tr th:nth-child(n+5) {
+    border-radius: 0 .625rem .625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+    border-radius: .625rem 0 0 .625rem;
+}
+
+tbody{
+    background-color: #F3F3F3FF;
+    box-shadow: #718096;
+    border-radius: 10px;
+    border-color: #000000;
+}
+.fc-dayGridMonth-button .fc-button .fc-button-primary button{
+    background-color: #F3F3F3FF !important;
+}

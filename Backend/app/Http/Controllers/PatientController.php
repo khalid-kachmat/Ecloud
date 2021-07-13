@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Service;
 use App\Models\Slots;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use JetBrains\PhpStorm\NoReturn;
 
 class PatientController extends Controller
 {
@@ -62,21 +61,24 @@ class PatientController extends Controller
         $patient->createNewPatient($result);
     }
 
-    public function getAppointmentDataPerPatient(Request $request, Appointment $appointment, Slots $slots, User $user, Service $service)
+    public function getAppointmentDataPerPatient(Request $request, Appointment $appointment, Slots $slots, User $user, Service $service): JsonResponse
     {
         $results = $appointment->all()->where('app_patient_id', '=', $request->getContent());
-        $array = array();
+        $response = array();
         foreach ($results as $result) {
-            $slot = $slots->all()->where('slot_app_id', '=', $result->app_id);
-            $doc = $user->all()->where('id', '=', $result->app_doc_id);
-            $serve = $service->all()->where('');
+            $slot = $slots->all()->where('slot_app_id', '=', $result->app_id)->first();
+            $doc = $user->all()->where('id', '=', $result->app_doc_id)->first();
+            $serve = $service->all()->where('service_id','=', $result->app_service_id)->first();
             $data = array(
-                ''
+                'doc' => $doc->name,
+                'startDate' => $slot->start,
+                'service' => $serve->service_name
             );
-//            array_push($array,$slot);
+            array_push($response,$data);
 
         }
-//        echo $array;
+        return response()->json($response);
+
 
     }
 

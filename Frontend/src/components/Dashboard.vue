@@ -2,7 +2,7 @@
 
 
   <div>
-    <nav class="navbar">
+    <nav class="navbar bg-gray-300">
       <ul class="navbar-nav">
         <li class="logo">
           <a href="index.html" class="nav-link">
@@ -92,125 +92,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-main {
-  position: relative;
-  z-index: 1;
-  width: auto;
-  background-color: rgb(243, 243, 243);
-  margin-left: 8rem;
-  border-radius: 40px 40px 40px;
-  overflow-x: hidden;
-}
-
-.navbar {
-  background-color: #6ECD89;
-  width: 20rem;
-  height: 100vh;
-  position: fixed;
-  transition: 300ms ease;
-}
-
-
-.navbar-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-
-}
-
-.nav-item {
-  width: 100%;
-}
-
-
-.social i.fab {
-  font-size: 3em;
-  color: black;
-}
-
-.nav-item:last-child {
-  margin-top: auto;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 5rem;
-  text-decoration: none;
-  color: black;
-}
-
-.nav-link svg {
-  width: 3em;
-  min-width: 3rem;
-  margin: 0 2.5rem;
-  height: 2em;
-}
-
-.navbar:hover {
-  width: 20rem;
-  transition: 300ms ease;
-}
-
-
-.nav-link .fab {
-  font-size: 2rem;
-}
-
-.nav-link .far {
-  font-size: 2rem;
-  margin: 0 1.5rem;
-}
-
-.nav-link:hover {
-  color: white;
-}
-
-.link-text {
-  display: none;
-  margin-left: 1rem;
-}
-
-.navbar:hover .link-text {
-  display: block;
-}
-
-.logo {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 0.3ch;
-}
-
-.link-text {
-  display: none;
-}
-
-.user {
-  margin-right: 11em;
-}
-
-.head-card {
-  background-color: #6ECD89;
-  border-radius: 36px;
-}
-
-.color-btn {
-
-  background-color: #6ECD89 !important;
-
-}
-
-.fc .fc-button-primary {
-
-  background-color: #24ff17 !important;
-
-
-}
 
 </style>

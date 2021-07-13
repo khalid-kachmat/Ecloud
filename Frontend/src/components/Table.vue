@@ -4,13 +4,18 @@
       <div class="w-full py-20 lg:w-5/6">
         <div class="relative mr-4 my-2 flex space-x-10 w-full	">
           <div class="flex justify-start w-1/2">
-            <input type="search" v-model="search " class="bg-white shadow-lg rounded-xl  p-2 w-22"
+            <input type="search" v-model="search " class="bg-white shadow-lg rounded-xl  p-2 w-22 text-semibold"
                    placeholder="Search by name...">
           </div>
           <div class="flex justify-end w-1/2	">
             <button @click="addNewPatient"
-                    class="w-1/2 px-1 py-1  bg-white hover:border-white shadow-lg rounded-xl hover:text-black text-gray-400 font-bold transition ease-in-out duration-700 ">
-              Add new Patient
+                    class=" flex item-center gap-2 w-30 px-8 py-2  bg-white hover:border-white shadow-lg rounded-xl hover:text-black text-gray-400 font-bold transition ease-in-out duration-700 ">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+              </svg>
+              Add new
             </button>
           </div>
         </div>
@@ -38,7 +43,7 @@
                 {{ row.patientCin }}
               </td>
               <td class="py-3 px-6 text-center">
-                <span class="bg-green-300 text-white font-bold py-1 px-3 rounded-full text-xs">{{ row.appNbr }}</span>
+                <span class="bg-gray-300 text-black font-bold py-1 px-3 rounded-full text-xs">{{ row.appNbr }}</span>
               </td>
               <td class="py-3 px-6 text-center">
                 <div class="flex item-center justify-center">
@@ -72,26 +77,20 @@
             </tbody>
           </table>
         </div>
-        <div class="flex space-x-3 ">
-          <div class="min-w-min max-w-max min-h-min rounded-xl shadow-xl   bg-white p-5">
+        <div class="w-full flex justify-center my-4 font-semibold text-gray-500">
+          <h1><span>Appointments</span></h1>
+        </div>
+        <div class="flex flex-wrap space-x-3 space-y-3 ">
+          <div v-for="(row,index) in appointments" :key="index"
+               class="min-w-min max-w-max min-h-min rounded-xl shadow-xl   bg-white p-5">
             <div class="w-full pb-5 flex justify-center space-x-2 text-xl text-gray-400 font-semibold ">
-              <h1>Appointment</h1><span class="bg-green-300 text-white font-bold py-1 px-3 rounded-full text-xs">1
+              <h2>Appointment</h2><span
+                class="bg-gray-300 text-black font-bold py-1 px-3 rounded-full text-xs">{{ index + 1 }}
             </span></div>
-            <div class="space-y-2 text-xs">
-              <p>Doctor: test test test test</p>
-              <p>Service: test test test test</p>
-              <p>Date: test test test test</p>
-            </div>
-
-          </div>
-          <div class="min-w-min max-w-max min-h-min rounded-xl shadow-xl   bg-white p-5">
-            <div class="w-full pb-5 flex justify-center space-x-2 text-xl text-gray-400 font-semibold ">
-              <h1>Appointment</h1><span class="bg-green-300 text-white font-bold py-1 px-3 rounded-full text-xs">1
-            </span></div>
-            <div class="space-y-2 text-xs">
-              <p>Doctor: test test test test</p>
-              <p>Service: test test test test</p>
-              <p>Date: test test test test</p>
+            <div class="space-y-2 text-xs font-semibold">
+              <p>Doctor: {{ row.doc }}</p>
+              <p>Service: {{ row.service }}</p>
+              <p>Date: {{ row.startDate }}</p>
             </div>
 
           </div>
@@ -103,13 +102,14 @@
     <div class="w-2/4 py-20  mr-10 flex mt-25 justify-center">
 
       <div class="w-full ">
-        <div class="flex justify-center text-xl font-semibold text-gray-500 ">
+        <div class="flex justify-center my-5 font-semibold text-gray-500 ">
 
-          <h1 class="bg-white rounded-xl shadow-xl mb-8  py-2 px-4 " :class="displayVisibility ? 'hidden' : 'block'">Display Patient Information</h1>
-          <h1 class="bg-white rounded-xl shadow-xl mb-8  py-2 px-4 " :class="editVisibility ? 'hidden' : 'block'">Edit Patient Information</h1>
-          <h1 class="bg-white rounded-xl shadow-xl mb-8  py-2 px-4 " :class="addVisibility ? 'hidden' : 'block'">Add new Patient</h1>
+          <h1 :class="displayVisibility ? 'hidden' : 'block'"><span>Patient Information</span></h1>
+          <h1 :class="editVisibility ? 'hidden' : 'block'"><span>Edit Patient Information</span></h1>
+          <h1 :class="addVisibility ? 'hidden' : 'block'"><span>Add new Patient</span></h1>
         </div>
-        <form @submit="sendDataIntoDataBase" class=" bg-white rounded-xl p-4" :class="formVisibility ? 'hidden' : 'block'">
+        <form @submit="sendDataIntoDataBase" class=" bg-white rounded-xl p-4"
+              :class="formVisibility ? 'hidden' : 'block'">
 
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
@@ -184,7 +184,7 @@
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
-                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-white  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
+                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
               Save
             </button>
             <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
@@ -237,7 +237,8 @@
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold p-2 ">Assurance</label>
               <div class="flex items-center space-x-4">
-                <input type="text" readonly v-model="assuranceVisibility" class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                <input type="text" readonly v-model="assuranceVisibility"
+                       class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
               </div>
             </div>
           </div>
@@ -287,6 +288,7 @@ export default {
       //objects
       patientsData: '',
       assurancesData: '',
+      appointments: '',
     }
   },
   computed: {
@@ -333,7 +335,7 @@ export default {
       this.patientAge = today.getUTCFullYear() - (new Date(this.patientBirth).getUTCFullYear())
     },
     editPatient(patientId, patientAssuranceId) {
-
+      this.appointments = ''
       this.formVisibility = false;
       this.editVisibility = false;
       this.displayVisibility = true;
@@ -392,7 +394,7 @@ export default {
       this.displayFormVisibility = true
       this.displayVisibility = true;
       this.editVisibility = true
-      this.patientFirst = this.patientLast = this.patientBirth = this.patientId = this.patientAge = this.assuranceId = this.patientNote = this.patientCin = this.assuranceVisibility = '';
+      this.patientFirst = this.patientLast = this.patientBirth = this.patientId = this.patientAge = this.assuranceId = this.patientNote = this.patientCin = this.assuranceVisibility = this.appointments = '';
     },
     sendDataIntoDataBase() {
       if (this.patientFirst === '' || this.patientLast === '' || this.patientCin === '' || this.patientBirth === '' || this.patientAge === '' || this.assuranceVisibility === '' || this.assuranceId === '') {
@@ -420,10 +422,11 @@ export default {
     getPatientAppointments(id) {
       let data = {
         method: 'POST',
-        body : id
+        body: id
       }
-      fetch('http://127.0.0.1:8000/api/appointmentPerPatient',data)
-
+      fetch('http://127.0.0.1:8000/api/appointmentPerPatient', data)
+          .then(res => res.json())
+          .then(data => this.appointments = data)
     }
   }
 }
@@ -431,32 +434,5 @@ export default {
 
 <style scoped>
 
-
-
-.table-bg {
-  background-color: #F2F2F2;
-}
-
-.table {
-  border-spacing: 0 15px;
-}
-
-i {
-  font-size: 1rem !important;
-}
-
-.table tr {
-  border-radius: 20px;
-}
-
-tr td:nth-child(n+5),
-tr th:nth-child(n+5) {
-  border-radius: 0 .625rem .625rem 0;
-}
-
-tr td:nth-child(1),
-tr th:nth-child(1) {
-  border-radius: .625rem 0 0 .625rem;
-}
 
 </style>

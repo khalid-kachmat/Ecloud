@@ -2,7 +2,7 @@
 
 
   <div>
-    <nav class="navbar">
+    <nav class="navbar ">
       <ul class="navbar-nav">
         <li class="logo">
           <a href="index.html" class="nav-link">
@@ -58,11 +58,11 @@
       </ul>
     </nav>
 
-    <main class="h-screen bg-gray-200">
+    <main class="">
 
-      <section class=" flex  w-screen h-screen m-12">
+      <section class=" flex my-10 ml-10  w-screen h-screen justify-center gap-20">
 
-        <FullCalendar class="w-1/2 h-4/3" @select="handleSelect" :options="calendarOptions"/>
+        <FullCalendar class="w-2/5 h-4/3 bg-white p-4 rounded-xl shadow-xl" @select="handleSelect" :options="calendarOptions"/>
         <div class="w-1/2 h-2/3 ">
           <AppointmentForm :start="start" :end="end" :endDate="endDate" :endTime="endTime" :startDate="startDate"
                            :startTime="startTime"/>
@@ -131,8 +131,8 @@ export default {
         slotMaxTime: '18:00',
         slotDuration: '00:15:00',
         longPressDelay: 100,
-        eventColor: "#6ECD89",
-        eventTextColor: 'white',
+        eventColor: "#a9b1bb",
+        eventTextColor: 'black',
         height: "70vh",
         themeSystem: "Minty",
 
@@ -164,9 +164,7 @@ export default {
   },
   computed: {},
   mounted() {
-
     this.getAppointmentData()
-
   },
   methods: {
     handleSelect: function (item) {
@@ -219,8 +217,6 @@ export default {
 
       });
     },
-
-
   }
 }
 
@@ -228,124 +224,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-main {
-  position: relative;
-  z-index: 1;
-  width: auto;
-  margin-left: 8rem;
-  border-radius: 40px 40px 40px;
-  overflow-x: hidden;
-}
-
-.navbar {
-  background-color: #6ECD89;
-  width: 20rem;
-  height: 100vh;
-  position: fixed;
-  transition: 300ms ease;
-}
-
-
-.navbar-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-
-}
-
-.nav-item {
-  width: 100%;
-}
-
-
-.social i.fab {
-  font-size: 3em;
-  color: black;
-}
-
-.nav-item:last-child {
-  margin-top: auto;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 5rem;
-  text-decoration: none;
-  color: black;
-}
-
-.nav-link svg {
-  width: 3em;
-  min-width: 3rem;
-  margin: 0 2.5rem;
-  height: 2em;
-}
-
-.navbar:hover {
-  width: 20rem;
-  transition: 300ms ease;
-}
-
-
-.nav-link .fab {
-  font-size: 2rem;
-}
-
-.nav-link .far {
-  font-size: 2rem;
-  margin: 0 1.5rem;
-}
-
-.nav-link:hover {
-  color: white;
-}
-
-.link-text {
-  display: none;
-  margin-left: 1rem;
-}
-
-.navbar:hover .link-text {
-  display: block;
-}
-
-.logo {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 0.3ch;
-}
-
-.link-text {
-  display: none;
-}
-
-.user {
-  margin-right: 11em;
-}
-
-.head-card {
-  background-color: #6ECD89;
-  border-radius: 36px;
-}
-
-.color-btn {
-
-  background-color: #6ECD89 !important;
-
-}
-
-.fc .fc-button-primary {
-
-  background-color: #24ff17 !important;
-
-
-}
 
 </style>

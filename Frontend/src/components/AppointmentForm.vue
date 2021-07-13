@@ -1,13 +1,13 @@
 <template>
 
 
-  <div class="w-full m-4  relative">
+  <div class="w-full   ">
 
-    <div class="flex justify-center items-center w-full ">
-      <h1 class=" font-bold text-xl ">Appointment Details</h1>
+    <div class="flex justify-center w-3/4 my-5 font-semibold text-gray-500 ">
+      <h1 class=""><span>Appointment Details</span></h1>
     </div>
 
-    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-green-500  bg-opacity-10 w-3/4 p-10">
+    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-white w-3/4 p-4">
       <div><span style="color:red" v-show="errorField">{{ error }}</span>
         <div class="flex justify-center items-center w-full space-x-12">
           <div class="flex w-1/2 flex-col justify-center">
@@ -15,7 +15,7 @@
         *
        </span></label>
             <select @change="importServiceId" v-model="service" name="service"
-                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3  sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                    class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               <option v-bind:key="row.service_id" v-for="row in servicesData">{{ row.service_name }}</option>
             </select>
@@ -24,13 +24,13 @@
             <label class="leading-loose">Start Date/Time<span class="text-red-500">
         *
        </span></label>
-            <div class="flex full  justify-center">
+            <div class="flex full space-x-3  justify-center">
               <input v-model="startDate" name="startDate"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "
                      type="date">
               <input
                   v-model="startTime" name="startTime"
-                  class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-30 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  class="px-4 py-2  w-30 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "
                   type="time">
             </div>
 
@@ -42,7 +42,7 @@
         *
        </span></label>
             <select @change="importDocId" v-model="doctor" name="doctor"
-                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                    class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               <option v-bind:key="row.doc_id" v-for="row in docsData">{{ row.name }}</option>
             </select>
@@ -52,12 +52,12 @@
             <label class="leading-loose">End Date/Time<span class="text-red-500">
         *
        </span></label>
-            <div class="flex full  justify-center">
+            <div class="flex full space-x-3 justify-center">
               <input v-model="endDate" name="endDate"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "
                      type="date">
               <input v-model="endTime" name="endTime"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-30 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                     class="px-4 py-2  w-30 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "
                      type="time">
             </div>
           </div>
@@ -97,9 +97,9 @@
         <div class=" " :class="selectBtn ? 'hidden' : 'block' ">
           <div class="flex w-full items-center justify-center">
             <input v-model="search" type="search" placeholder="Enter Patient name..."
-                   class=" my-3  p-1 border focus:ring-gray-500 focus:border-gray-900 w-1/2 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                   class="px-4 py-2 m-3  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
           </div>
-          <div class="flex flex-wrap space-x-4 w-full bg-green-200 justify-center rounded-xl items-center"
+          <div class="flex flex-wrap space-x-4 w-full bg-gray-200 justify-center rounded-xl items-center"
                id="existing-customers-list">
 
             <button v-for="(row) in filter " :key="row.patient_id"
@@ -117,7 +117,7 @@
         *
        </span></label>
               <input v-model="firstName" type="text" name="firstName"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
             <input name="patient_id" hidden v-model="patientId">
             <input name="assurance_id" hidden v-model="assuranceId">
@@ -127,14 +127,14 @@
        </span></label>
               <div class="flex items-center space-x-4">
                 <input @change="ageCalculator" v-model="birthDate" type="date" name="birthDate"
-                       class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                       class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               </div>
             </div>
             <div class="flex flex-col 1/4 justify-center">
               <label class="leading-loose font-semibold ">Age</label>
               <input v-model="age" type="number" readonly name="age"
-                     class="font-bold   bg-transparent  w-16  rounded-md focus:outline-none text-gray-600">
+                     class="px-4 py-2  w-16 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md cursor-default ">
             </div>
 
           </div>
@@ -144,7 +144,7 @@
         *
        </span></label>
               <input v-model="lastName" type="text"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Cin<span class="text-red-500">
@@ -152,22 +152,14 @@
        </span></label>
 
               <input v-model="cin" type="text"
-                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
             </div>
           </div>
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Note</label>
-              <textarea
-                  v-model="note"
-                  rows="4"
-                  name="note"
-                  id="note"
-                  placeholder="Note"
-                  class="w-full h-28 py-2 px-3 focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 "
-
-              ></textarea>
+              <textarea v-model="note" rows="4" name="note" id="note" placeholder="Note" class="px-4 py-2  w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold p-2 ">Assurance<span class="text-red-500">
@@ -187,7 +179,7 @@
         *
        </span></label>
             <select @change="importAssuranceId" name="assurance" v-model="assurance"
-                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                    class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               <option v-bind:key="row.assurance_id" v-for="row in assurancesData">{{ row.assurance_name }}</option>
             </select>
@@ -195,9 +187,7 @@
         </div>
       </div>
       <div class="flex flex-col items-center justify-center w-full">
-        <button
-            type="submit"
-            class="w-1/2 px-1 py-1  border  border-gray-500 hover:border-white hover:text-white hover:bg-gray-500 text-gray-500 font-bold transition ease-in-out duration-700  rounded ">
+        <button type="submit" class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
           Save
         </button>
         <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
