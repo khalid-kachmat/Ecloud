@@ -33,8 +33,14 @@ Route::get('getdocdata', [DoctorController::class, 'importDoctorsData']);
 //services api for importing services data for services table
 Route::get('services',[ServiceController::class , 'importServicesData']);
 
-// receiving Post data from the vuejs form
+// receiving Post data from the vue js form
 Route::post('getAppointmentData',[AppointmentController::class, 'getAppointmentData']);
 
 //sent all appointments data into vue component
 Route::get('sentAppointmentData',[AppointmentController::class, 'sentAppointmentData']);
+
+Route::get('patientDataAppNbr', [PatientController::class, 'patientDataAppNbr']);
+
+Route::post('addNewPatient', [PatientController::class, 'addNewPatient']);
+
+Route::post('appointmentPerPatient', [PatientController::class, 'getAppointmentDataPerPatient']);

@@ -126,7 +126,7 @@
         *
        </span></label>
               <div class="flex items-center space-x-4">
-                <input v-model="birthDate" type="date" name="birthDate"
+                <input @change="ageCalculator" v-model="birthDate" type="date" name="birthDate"
                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-2/3 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
 
               </div>
@@ -226,7 +226,7 @@ export default {
       lastName: '',
       cin: '',
       birthDate: '',
-      age: '20',
+      age: '',
       assurance: '',
       note: '',
       selectBtn: true,
@@ -251,8 +251,8 @@ export default {
   computed: {
     filter() {
       const data = this.patientsData
-
-      return data.filter(item => {
+      console.log(this.patientsData)
+      return data && data.filter(item => {
         return item.patient_first_name.includes(this.search) || item.patient_last_name.includes(this.search)
       })
     }
@@ -262,8 +262,6 @@ export default {
     this.fetchAssuranceData()
     this.fetchDocData()
     this.fetchServicesData()
-
-
   },
   methods: {
     selectPatient() {
@@ -280,7 +278,6 @@ export default {
           .then(data => this.patientsData = data)
 
     },
-
     fetchAssuranceData() {
       fetch('http://127.0.0.1:8000/api/assurances', {
         method: 'get'
@@ -295,15 +292,13 @@ export default {
           .then(res => res.json())
           .then(data => this.docsData = data)
     },
-
     fetchServicesData() {
       fetch('http://127.0.0.1:8000/api/services', {
         method: 'get'
       })
           .then(res => res.json())
           .then(data => this.servicesData = data)
-    }
-    ,
+    },
     displayPatientData(patientIid, assuranceId) {
 
       this.assuranceId = '';
@@ -405,6 +400,10 @@ export default {
       this.selectBtn = true
       this.$refs.calendar.$emit('refetch-events')
 
+    },
+    ageCalculator() {
+      let today = new Date
+      this.age = today.getUTCFullYear() - (new Date(this.birthDate).getUTCFullYear())
     }
 
   }

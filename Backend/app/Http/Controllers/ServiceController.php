@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function importServicesData(Request $request)
+    public function importServicesData()
     {
         return Service::all();
     }

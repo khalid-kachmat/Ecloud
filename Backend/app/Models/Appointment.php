@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class Appointment extends Model
@@ -17,7 +18,7 @@ class Appointment extends Model
         return Appointment::all()->last();
     }
 
-    public function getAllAppointments(): \Illuminate\Support\Collection
+    public function getAllAppointments(): Collection
     {
         return DB::table('appointments')
             ->join('slots', 'slot_app_id', '=', 'app_id')

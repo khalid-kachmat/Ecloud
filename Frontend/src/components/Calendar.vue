@@ -58,39 +58,27 @@
       </ul>
     </nav>
 
-    <main class="h-screen">
+    <main class="h-screen bg-gray-200">
 
       <section class=" flex  w-screen h-screen m-12">
 
         <FullCalendar class="w-1/2 h-4/3" @select="handleSelect" :options="calendarOptions"/>
         <div class="w-1/2 h-2/3 ">
-
           <AppointmentForm :start="start" :end="end" :endDate="endDate" :endTime="endTime" :startDate="startDate"
                            :startTime="startTime"/>
-
         </div>
       </section>
-
-
     </main>
-
   </div>
-
-
 </template>
 
 <script>
 import AppointmentForm from "@/components/AppointmentForm";
-// import VueSweetalert2 from "vue-sweetalert2";
-
 import '@fullcalendar/core/vdom'
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
-
-
-
 
 export default {
   components: {
@@ -174,9 +162,7 @@ export default {
       }
     }
   },
-  computed:{
-
-  },
+  computed: {},
   mounted() {
 
     this.getAppointmentData()
@@ -210,7 +196,6 @@ export default {
       this.endTime = endHours + ':' + endMin
 
     },
-
     getAppointmentData() {
       fetch('http://127.0.0.1:8000/api/sentAppointmentData', {
         method: 'get'
@@ -239,22 +224,6 @@ export default {
   }
 }
 
-//ending
-
-// document.querySelector('button').classList.add("color-btn")
-
-// export default {
-//   name: 'Dash',
-//   props: {
-//     msg: String,
-//     content: String
-//   },
-//   // components: {
-//   //   Table,
-//   //   Users,
-//   //   test
-//   // }
-// }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -263,7 +232,6 @@ main {
   position: relative;
   z-index: 1;
   width: auto;
-  background-color: white;
   margin-left: 8rem;
   border-radius: 40px 40px 40px;
   overflow-x: hidden;

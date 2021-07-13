@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Slots;
-use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
@@ -29,14 +29,6 @@ class AppointmentController extends Controller
                 "app_end_time"      => $data['endTime']
             );
 
-            $insertApp = (new Appointment)->insertData($appointment);
-
-            $slot = array(
-                "start"         => $data['start'],
-                "end"           => $data['end'],
-                "slot_app_id"   => $insertApp['app_id']
-            );
-            (new Slots)->insertSlot($slot);
         } else {
             $patient = array(
                 "patient_first_name"    => $data['firstName'],
@@ -59,18 +51,18 @@ class AppointmentController extends Controller
                 "app_end_date"          => $data['endDate'],
                 "app_end_time"          => $data['endTime']
             );
-            $insertApp = (new Appointment)->insertData($appointment);
-            $slot = array(
-                "start"         => $data['start'],
-                "end"           => $data['end'],
-                "slot_app_id"   => $insertApp['app_id']
-            );
-            (new Slots)->insertSlot($slot);
         }
+        $insertApp = (new Appointment)->insertData($appointment);
+        $slot = array(
+            "start"         => $data['start'],
+            "end"           => $data['end'],
+            "slot_app_id"   => $insertApp['app_id']
+        );
+        (new Slots)->insertSlot($slot);
     }
 
 
-    public function sentAppointmentData(): \Illuminate\Http\JsonResponse
+    public function sentAppointmentData(): JsonResponse
     {
         $test = (new Slots)->getSlotsForAppointment();
         $result = array();

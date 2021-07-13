@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class DoctorController extends Controller
 {
-    public function importDoctorsData(Request $request): \Illuminate\Support\Collection
+    public function importDoctorsData(): Collection
     {
 
         $result = new Doctor();
