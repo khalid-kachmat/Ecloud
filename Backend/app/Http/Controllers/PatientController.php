@@ -58,7 +58,8 @@ class PatientController extends Controller
             "patient_assurance_id" => $data['assuranceId'],
             "patient_assurance" => $data['assuranceVisibility']
         );
-        $patient->createNewPatient($result);
+        $patient->editPatient($result, $data['patientCin']);
+
     }
 
     public function getAppointmentDataPerPatient(Request $request, Appointment $appointment, Slots $slots, User $user, Service $service): JsonResponse
@@ -68,18 +69,23 @@ class PatientController extends Controller
         foreach ($results as $result) {
             $slot = $slots->all()->where('slot_app_id', '=', $result->app_id)->first();
             $doc = $user->all()->where('id', '=', $result->app_doc_id)->first();
-            $serve = $service->all()->where('service_id','=', $result->app_service_id)->first();
+            $serve = $service->all()->where('service_id', '=', $result->app_service_id)->first();
             $data = array(
                 'doc' => $doc->name,
                 'startDate' => $slot->start,
                 'service' => $serve->service_name
             );
-            array_push($response,$data);
+            array_push($response, $data);
 
         }
         return response()->json($response);
 
 
+    }
+
+    public function deletePatient(Request $request, Patient $patient)
+    {
+        $patient->deletePatient($request->getContent());
     }
 
 }

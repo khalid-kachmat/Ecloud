@@ -65,7 +65,7 @@
                     </svg>
                   </div>
                   <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg @click="deletePatient(row.patientId,row.patientFirst,row.patientLast)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                     </svg>
@@ -108,7 +108,7 @@
           <h1 :class="editVisibility ? 'hidden' : 'block'"><span>Edit Patient Information</span></h1>
           <h1 :class="addVisibility ? 'hidden' : 'block'"><span>Add new Patient</span></h1>
         </div>
-        <form @submit="sendDataIntoDataBase" class=" bg-white rounded-xl p-4"
+        <form @submit.prevent="sendDataIntoDataBase" class=" bg-white rounded-xl p-4"
               :class="formVisibility ? 'hidden' : 'block'">
 
           <div class="flex items-center justify-center w-full py-4 space-x-4">
@@ -283,6 +283,7 @@ export default {
       editVisibility: true,
       addVisibility: true,
       errorField: false,
+      function: 'add',
 
 
       //objects
@@ -336,6 +337,7 @@ export default {
     },
     editPatient(patientId, patientAssuranceId) {
       this.appointments = ''
+      this.function = 'edit'
       this.formVisibility = false;
       this.editVisibility = false;
       this.displayVisibility = true;
@@ -345,6 +347,7 @@ export default {
 
       this.patientsData.forEach(item => {
         if (item.patientId == patientId) {
+          this.patientId = item.patientId
           this.patientFirst = item.patientFirst;
           this.patientLast = item.patientLast;
           this.patientBirth = item.patientBirth;
@@ -389,6 +392,10 @@ export default {
       this.getPatientAppointments(patientId);
     },
     addNewPatient() {
+      this.function = 'add'
+      if (this.patientId === '') {
+        this.patientId = 0
+      }
       this.addVisibility = false
       this.formVisibility = false
       this.displayFormVisibility = true
@@ -403,6 +410,8 @@ export default {
         const data = {
           method: 'POST',
           body: JSON.stringify({
+            function: this.function,
+            patientId: this.patientId,
             assuranceId: this.assuranceId,
             patientFirst: this.patientFirst,
             patientLast: this.patientLast,
@@ -414,7 +423,9 @@ export default {
           })
         };
         fetch('http://127.0.0.1:8000/api/addNewPatient', data);
-        this.addNewPatient()
+        this.getPatientData()
+        this.fetchAssuranceData()
+        this.addVisibility = this.formVisibility = this.displayFormVisibility = this.displayVisibility = this.editVisibility = true
 
       }
 
@@ -427,6 +438,26 @@ export default {
       fetch('http://127.0.0.1:8000/api/appointmentPerPatient', data)
           .then(res => res.json())
           .then(data => this.appointments = data)
+    },
+    deletePatient(id,first,last) {
+      this.$swal.fire({
+        title: 'Do you want to Delete this ?',
+        text: first + ' ' + last,
+        showDenyButton: true,
+        showCancelButton: true,
+        showConfirmButton: false,
+        denyButtonText: `Delete`,
+      }).then((result) => {
+        if (result.isDenied) {
+          let data = {
+            method : 'POST',
+            body: id
+          }
+          fetch('http://127.0.0.1:8000/api/deletePatient',data)
+          this.$swal.fire('Deleted!', '', 'success')
+          this.getPatientData()
+        }
+      })
     }
   }
 }

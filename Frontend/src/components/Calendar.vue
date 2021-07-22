@@ -2,6 +2,7 @@
 
 
   <div>
+
     <nav class="navbar ">
       <ul class="navbar-nav">
         <li class="logo">
@@ -14,6 +15,7 @@
           </a>
         </li>
 
+
         <li class="nav-item"><a href="index.html" class="nav-link">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"
                xmlns="http://www.w3.org/2000/svg">
@@ -23,15 +25,17 @@
           </svg>
           <span class="link-text">Home</span>
         </a></li>
-        <li class="nav-item"><a href="gallery.html" class="nav-link">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <li class="nav-item"><a href="/calendar" class="nav-link">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           <span class="link-text">GALLERY</span>
         </a></li>
         <li class="nav-item"><a href="reserve.html" class="nav-link">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
           </svg>
@@ -46,8 +50,10 @@
           </svg>
           <span class="link-text">CONTACT US</span>
         </a></li>
+
         <li class="nav-item"><a href="#" class="nav-link">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
           </svg>
@@ -58,13 +64,16 @@
       </ul>
     </nav>
 
-    <main class="">
+    <main class="xl:h-screen">
 
-      <section class=" flex my-10 ml-10  w-screen h-screen justify-center gap-20">
+      <section id="calendarSection" class=" flex my-10 md:ml-10  w-screen h-screen justify-center gap-20 ">
 
-        <FullCalendar class="w-2/5 h-4/3 bg-white p-4 rounded-xl shadow-xl" @select="handleSelect" :options="calendarOptions"/>
-        <div class="w-1/2 h-2/3 ">
-          <AppointmentForm :start="start" :end="end" :endDate="endDate" :endTime="endTime" :startDate="startDate"
+        <FullCalendar id="fullCalendar"
+                      class="test w-full h-1/2 bg-white p-4 rounded-xl shadow-xl xl:w-2/5 font-semibold text-gray-500"
+                      @select="handleSelect" :options="calendarOptions"/>
+        <div id="appointmentForm" class="w-1/2 h-2/3 ">
+          <AppointmentForm :start="start" :end="end" :endDate="endDate" :endTime="endTime"
+                           :startDate="startDate"
                            :startTime="startTime"/>
         </div>
       </section>
@@ -157,8 +166,6 @@ export default {
           startTime: '09:00', // a start time (10am in this example)
           endTime: '18:00', // an end time (6pm in this example)
         },
-
-
       }
     }
   },
@@ -168,7 +175,7 @@ export default {
   },
   methods: {
     handleSelect: function (item) {
-      console.log(item.startStr)
+
       this.start = item.startStr;
       this.end = item.endStr;
       this.startDate = (new Date(item.startStr)).toISOString().slice(0, 10)
@@ -203,7 +210,20 @@ export default {
 
     },
     showEvent: function (item) {
-      this.$swal(item.event.title)
+      // this.$swal(item.event.title)
+      this.$swal.fire({
+        title: 'Do you want to Delete this ?',
+        text: item.event.title,
+        showDenyButton: true,
+        showCancelButton: true,
+        showConfirmButton: false,
+        denyButtonText: `Delete`,
+      }).then((result) => {
+        if (result.isDenied) {
+          this.deleteAppointment(item.event.id)
+          this.$swal.fire('Deleted!', '', 'success')
+        }
+      })
     },
     showComment: function (item) {
       this.$swal({
@@ -217,6 +237,15 @@ export default {
 
       });
     },
+    deleteAppointment(id) {
+      let data = {
+        method: 'POST',
+        body: id
+      }
+      fetch('http://127.0.0.1:8000/api/deleteAppointment', data)
+      location.reload()
+
+    }
   }
 }
 

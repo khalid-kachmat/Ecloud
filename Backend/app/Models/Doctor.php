@@ -5,6 +5,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 
@@ -12,12 +14,12 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
 
-    public function importDocData(): \Illuminate\Support\Collection
+    public function importDocData(): Collection
     {
         return DB::table('users')
             ->join('doctors', 'id', '=', 'doc_user_id')
@@ -26,11 +28,16 @@ class Doctor extends Model
             ->get();
     }
 
-    public function getDocNameById($id): \Illuminate\Support\Collection
+    public function getDocNameById($id): Collection
     {
         return DB::table('users')
             ->select('name')
-            ->where('id' , '=' , $id)
+            ->where('id', '=', $id)
             ->get();
+    }
+
+    public function services(): HasOne
+    {
+        return $this->hasOne(Service::class);
     }
 }

@@ -14,7 +14,7 @@
           </a>
         </li>
 
-        <li class="nav-item"><a href="index.html" class="nav-link">
+        <li class="nav-item"><a href="/" class="nav-link">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"
                xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -23,29 +23,27 @@
           </svg>
           <span class="link-text">Home</span>
         </a></li>
-        <li class="nav-item"><a href="gallery.html" class="nav-link">
+        <li class="nav-item"><a href="/calendar" class="nav-link">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
-          <span class="link-text">GALLERY</span>
-        </a></li>
-        <li class="nav-item"><a href="reserve.html" class="nav-link">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-          </svg>
+
+        </a>
+         </li>
+        <span class="tooltip">GALLERY</span>
+        <li class="nav-item"><a href="/patients" class="nav-link">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
           <span class="link-text">RESERVATION</span>
         </a></li>
-        <li class="nav-item"><a href="contactus.html" class="nav-link">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-            </path>
-          </svg>
+        <li class="nav-item"><a href="/users" class="nav-link">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <span class="link-text">CONTACT US</span>
         </a></li>
+        <li class="nav-item"><a href="contactus.html" class="nav-link">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        <span class="link-text">CONTACT US</span>
+      </a></li>
         <li class="nav-item"><a href="#" class="nav-link">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -58,7 +56,7 @@
       </ul>
     </nav>
 
-    <main class="h-screen ">
+    <main class="xl:h-screen ">
 
       <component :is="content"/>
 
@@ -73,8 +71,9 @@
 </template>
 
 <script>
-import Table from "../components/Table";
+import Table from "./Patient";
 import Users from "../components/Users";
+import Patient from "@/components/Patient";
 
 
 export default {
@@ -86,6 +85,8 @@ export default {
   components: {
     Table,
     Users,
+    Patient,
+
   }
 }
 </script>

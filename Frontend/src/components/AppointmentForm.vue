@@ -3,13 +3,13 @@
 
   <div class="w-full   ">
 
-    <div class="flex justify-center w-3/4 my-5 font-semibold text-gray-500 ">
+    <div class="flex justify-center xl:w-3/4 my-5 font-semibold text-gray-500 ">
       <h1 class=""><span>Appointment Details</span></h1>
     </div>
 
-    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-white w-3/4 p-4">
+    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-white xl:w-3/4 p-4 shadow-xl">
       <div><span style="color:red" v-show="errorField">{{ error }}</span>
-        <div class="flex justify-center items-center w-full space-x-12">
+        <div class="flex justify-center items-center w-full space-y-5 space-x-12">
           <div class="flex w-1/2 flex-col justify-center">
             <label class="leading-loose">Service<span class="text-red-500">
         *
@@ -74,7 +74,7 @@
 
           <button
               v-on:click.prevent="addPatient"
-              class=" p-1 border  border-gray-500 hover:border-white hover:text-white hover:bg-gray-500 text-gray-500 font-bold transition ease-in-out duration-700  rounded inline-flex items-center">
+              class=" p-1 border  border-gray-500 hover:border-white hover:text-white hover:bg-gray-500 text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl inline-flex items-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,7 +85,7 @@
 
           <button
               v-on:click.prevent="selectPatient"
-              class=" p-1 border  border-gray-500 hover:border-white hover:text-white hover:bg-gray-500 text-gray-500 font-bold transition ease-in-out duration-700  rounded inline-flex items-center">
+              class=" p-1 border  border-gray-500 hover:border-white hover:text-white hover:bg-gray-500 text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl inline-flex items-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -159,7 +159,8 @@
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Note</label>
-              <textarea v-model="note" rows="4" name="note" id="note" placeholder="Note" class="px-4 py-2  w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
+              <textarea v-model="note" rows="4" name="note" id="note" placeholder="Note"
+                        class="px-4 py-2  w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold p-2 ">Assurance<span class="text-red-500">
@@ -187,7 +188,8 @@
         </div>
       </div>
       <div class="flex flex-col items-center justify-center w-full">
-        <button type="submit" class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
+        <button type="submit"
+                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
           Save
         </button>
         <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
@@ -241,7 +243,6 @@ export default {
   computed: {
     filter() {
       const data = this.patientsData
-      console.log(this.patientsData)
       return data && data.filter(item => {
         return item.patient_first_name.includes(this.search) || item.patient_last_name.includes(this.search)
       })
@@ -276,7 +277,7 @@ export default {
           .then(data => this.assurancesData = data)
     },
     fetchDocData() {
-      fetch('http://127.0.0.1:8000/api/getdocdata', {
+      fetch('http://127.0.0.1:8000/api/getDocData', {
         method: 'get'
       })
           .then(res => res.json())
@@ -343,7 +344,7 @@ export default {
           })
         };
         fetch('http://127.0.0.1:8000/api/getAppointmentData', data);
-        this.clearFields()
+        location.reload()
 
       }
 
@@ -359,7 +360,8 @@ export default {
       this.docsData.forEach(item => {
         if (item.name === this.doctor) {
           this.docId = item.doc_user_id;
-          console.log(this.docId)
+
+
         }
       })
     },
@@ -367,7 +369,7 @@ export default {
       this.servicesData.forEach(item => {
         if (item.service_name === this.service) {
           this.serviceId = item.service_id;
-          console.log(this.serviceId)
+
 
         }
       })

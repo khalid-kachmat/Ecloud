@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class ServiceController extends Controller
 {
-    public function importServicesData()
+    public function importServicesData(): Collection|array
     {
         return Service::all();
     }

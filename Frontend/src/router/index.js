@@ -12,11 +12,11 @@ const routes = [
     component: Users
   },
   {
-    path: '/',
+    path: '/patients',
     name: 'Dash',
     component: Dashboard,
     props: {
-      content: 'Table'
+      content: 'Patient'
     }
   },
   {
@@ -25,6 +25,15 @@ const routes = [
     component: Calendar,
 
   }
+  ,
+  {
+    path: '/users',
+    name: 'Dash',
+    component: Dashboard,
+    props: {
+      content: 'Users'
+    }
+  },
 ]
 
 const router = new VueRouter({

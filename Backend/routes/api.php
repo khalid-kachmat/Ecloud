@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Route;
 // patients api for importing patients data from patients table
 Route::get('patients', [PatientController::class, 'importPatientsData']);
 
-//doctors api for importing doctors data from doctors table
-Route::get('doctors' ,[DoctorController::class, 'importDoctorsData']);
+//doctors api for importing doctors data from doctors and users table
+Route::get('docInfo' ,[DoctorController::class, 'doctorInfo']);
 
 // assurance api for importing assurances data from assurance table
 Route::get('assurances',[AssuranceController::class, 'importAssuranceData']);
 
 // doctor api for importing doctors data for doctor table
-Route::get('getdocdata', [DoctorController::class, 'importDoctorsData']);
+Route::get('getDocData', [DoctorController::class, 'importDoctorsData']);
 
 //services api for importing services data for services table
 Route::get('services',[ServiceController::class , 'importServicesData']);
@@ -39,8 +39,13 @@ Route::post('getAppointmentData',[AppointmentController::class, 'getAppointmentD
 //sent all appointments data into vue component
 Route::get('sentAppointmentData',[AppointmentController::class, 'sentAppointmentData']);
 
+//delete appointment
+Route::post('deleteAppointment', [AppointmentController::class, 'deleteAppointment']);
+
 Route::get('patientDataAppNbr', [PatientController::class, 'patientDataAppNbr']);
 
 Route::post('addNewPatient', [PatientController::class, 'addNewPatient']);
+
+Route::post('deletePatient', [PatientController::class, 'deletePatient']);
 
 Route::post('appointmentPerPatient', [PatientController::class, 'getAppointmentDataPerPatient']);

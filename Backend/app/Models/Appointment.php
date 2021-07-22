@@ -31,4 +31,11 @@ class Appointment extends Model
     {
         return Appointment::all()->where('app_id', '=', $id)->first();
     }
+
+    public function deleteAppointment($id)
+    {
+        DB::table('appointments')
+            ->where('app_id', '=', $id)
+            ->delete();
+    }
 }

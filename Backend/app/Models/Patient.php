@@ -29,5 +29,19 @@ class Patient extends Model
         return Patient::all()->last();
     }
 
+    public function editPatient($result, $id)
+    {
+        DB::table('patients')
+            ->updateOrInsert(['patient_cin' => $id], $result);
+
+    }
+
+    public function deletePatient($id)
+    {
+        DB::table('patients')
+            ->where('patient_id', '=', $id)
+            ->delete();
+    }
+
 
 }

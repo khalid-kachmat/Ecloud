@@ -31,6 +31,7 @@ main {
 
 .nav-item {
     width: 100%;
+    align-items: center;
 }
 
 
@@ -41,6 +42,9 @@ main {
 
 .nav-item:last-child {
     margin-top: auto;
+}
+.nav-item:first-child{
+    margin-bottom: auto;
 }
 
 .nav-link {
@@ -156,5 +160,242 @@ tbody{
     border-color: #000000;
 }
 .fc-dayGridMonth-button .fc-button .fc-button-primary button{
-    background-color: #F3F3F3FF !important;
+    background-color: #F3F3F3FF !important;border-radius: 10px;
+}
+
+button.fc-prev-button.fc-button.fc-button-primary {
+    background-color: #718096;border-radius: 10px;
+}
+button.fc-next-button.fc-button.fc-button-primary{
+    background-color: #718096;border-radius: 10px;
+}
+button.fc-today-button.fc-button.fc-button-primary{
+    background-color: #718096;border-radius: 10px;
+}
+button.fc-dayGridMonth-button.fc-button.fc-button-primary {
+    background-color: #718096;border-radius: 10px;
+}
+button.fc-timeGridWeek-button.fc-button.fc-button-primary {
+    background-color: #718096;
+}
+
+button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
+    background-color: #718096;
+    border-radius: 0 10px 10px 0;
+}
+.tooltip{
+    position: absolute;
+    left: 53px;
+    top: 159px;
+    transform: translateX(-45%);
+    height: 35px;
+    width: 90px;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 35px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: black;
+    /*pointer-events: none;*/
+    opacity: 0;
+    transition:all 0.5s ease;
+}
+.tooltip:hover {
+
+    opacity: 1;
+    transition: all 0.6s ease;
+}
+
+.inp {
+    border:none;
+    border-bottom: 3px solid #ffffff;
+    padding: 5px 10px;
+    outline: none;
+}
+@media only screen and (max-width: 1280px) {
+    main {
+        position: relative;
+        height: 88vh;
+        margin: 0;
+        width: 100%;
+    }
+    .navbar:hover {
+        width: 100vw;
+    }
+    .nav-link svg {
+        width: 0;
+        min-width: 2rem;
+        margin: 0;
+    }
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: 8rem;
+    }
+    .navbar:hover .link-text {
+        display: none;
+    }
+    .nav-item:last-child {
+        margin-bottom: 5px;
+    }
+    .nav-item{
+        margin-top: 33px;
+    }
+    .logo {
+        display: none;
+    }
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .nav-link {
+        justify-content: center;
+    }
+
+    button.fc-today-button.fc-button.fc-button-primary{
+        display: none;
+    }
+    #appointmentForm{
+        width: 100%;
+    }
+    #calendarSection{
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    main {
+        position: relative;
+        height: 88vh;
+        width: 100%;
+        margin: 0;
+    }
+    .navbar:hover {
+        width: 100vw;
+    }
+    .nav-link svg {
+        width: 0;
+        min-width: 2rem;
+        margin: 0;
+    }
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: 8rem;
+    }
+    .navbar:hover .link-text {
+        display: none;
+    }
+    .nav-item:last-child {
+        margin-bottom: 5px;
+    }
+    .nav-item{
+        margin-top: 33px;
+    }
+    .logo {
+        display: none;
+    }
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .nav-link {
+        justify-content: center;
+    }
+    #calendarSection{
+        width: 97%;
+        display: block;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+    #appointmentForm{
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 640px) {
+    .navbar:hover {
+        width: 100vw;
+    }
+    .nav-link svg {
+        width: 0;
+        min-width: 2rem;
+        margin: 0;
+    }
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: 8rem;
+    }
+    .navbar:hover .link-text {
+        display: none;
+    }
+    .nav-item:last-child {
+        margin-bottom: 5px;
+    }
+    .nav-item{
+        margin-top: 33px;
+    }
+    .logo {
+        display: none;
+    }
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .nav-link {
+        justify-content: center;
+    }
+    main {
+        position: relative;
+        height: 88vh;
+        margin: 0;
+        width: 100%;
+
+    }
+    .pg {
+        width: 80vw;
+    }
+    p.why-p {
+        width: 20em;
+    }
+    #days_count, select {
+        width: 23em;
+    }
+    .overlay-desc h1 {
+        color: white;
+        font-size: 4vw;
+        text-align: center;
+    }
+    .text-h p {
+        color: white;
+        font-size: 2vw;
+    }
+    .fc-toolbar-title{
+        display: none;
+    }
+    button.fc-prev-button.fc-button.fc-button-primary {
+        display: none;
+    }
+    button.fc-next-button.fc-button.fc-button-primary{
+        display: none;
+    }
+    button.fc-today-button.fc-button.fc-button-primary{
+        display: none;
+    }
+    #calendarSection{
+        width: 95%;
+    }
+
+    #appointmentForm{
+        display: none;
+    }
+    #fullCalendar{
+        width: 100%;
+        margin: 0;
+    }
+
 }

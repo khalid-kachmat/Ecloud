@@ -20,4 +20,11 @@ class Slots extends Model
     {
         return Slots::all();
     }
+
+    public function deleteSlot($id)
+    {
+        DB::table('slots')
+            ->where('slot_app_id', '=', $id)
+            ->delete();
+    }
 }
