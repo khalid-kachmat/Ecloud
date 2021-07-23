@@ -40,4 +40,18 @@ class Doctor extends Model
     {
         return $this->hasOne(Service::class);
     }
+
+    public function updateOrAddDoc($result, $id)
+    {
+        DB::table('doctors')
+            ->updateOrInsert(['doc_id' => $id], $result);
+
+    }
+
+    public function deleteDoctor($id)
+    {
+        DB::table('doctors')
+            ->where('doc_id', '=', $id)
+            ->delete();
+    }
 }

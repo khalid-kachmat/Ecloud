@@ -44,7 +44,7 @@ class PatientController extends Controller
 
     }
 
-    public function addNewPatient(Request $request, Patient $patient)
+    public function updateOrAdd(Request $request, Patient $patient)
     {
         $data = json_decode($request->getContent(), true);
 
@@ -58,7 +58,7 @@ class PatientController extends Controller
             "patient_assurance_id" => $data['assuranceId'],
             "patient_assurance" => $data['assuranceVisibility']
         );
-        $patient->editPatient($result, $data['patientCin']);
+        $patient->updateOrAdd($result, $data['patientCin']);
 
     }
 

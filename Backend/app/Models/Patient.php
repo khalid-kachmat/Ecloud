@@ -29,7 +29,7 @@ class Patient extends Model
         return Patient::all()->last();
     }
 
-    public function editPatient($result, $id)
+    public function updateOrAdd($result, $id)
     {
         DB::table('patients')
             ->updateOrInsert(['patient_cin' => $id], $result);

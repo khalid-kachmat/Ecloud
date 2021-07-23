@@ -24,6 +24,12 @@ Route::get('patients', [PatientController::class, 'importPatientsData']);
 //doctors api for importing doctors data from doctors and users table
 Route::get('docInfo' ,[DoctorController::class, 'doctorInfo']);
 
+// add or edit a doctor
+Route::post('updateOrAddDoc', [DoctorController::class, 'updateOrAddDoc']);
+
+//delete doctor
+Route::post('deleteDoctor', [DoctorController::class, 'deleteDoctor']);
+
 // assurance api for importing assurances data from assurance table
 Route::get('assurances',[AssuranceController::class, 'importAssuranceData']);
 
@@ -44,7 +50,7 @@ Route::post('deleteAppointment', [AppointmentController::class, 'deleteAppointme
 
 Route::get('patientDataAppNbr', [PatientController::class, 'patientDataAppNbr']);
 
-Route::post('addNewPatient', [PatientController::class, 'addNewPatient']);
+Route::post('updateOrAdd', [PatientController::class, 'updateOrAdd']);
 
 Route::post('deletePatient', [PatientController::class, 'deletePatient']);
 

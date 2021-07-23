@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -42,13 +43,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function doctors(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function doctors(): HasMany
     {
         return $this->hasMany(Doctor::class);
     }
 
-    public function where($user_id): \Illuminate\Database\Query\Builder
+    public function where($user_id): Builder
     {
         return DB::table('users')->where('id' == $user_id);
+    }
+
+    public function updateOrAddUser($result, $id)
+    {
+        DB::table('users')
+            ->updateOrInsert(['id' => $id], $result);
+    }
+
+    public function deleteUser($id)
+    {
+        DB::table('users')
+            ->where('id', '=', $id)
+            ->delete();
     }
 }

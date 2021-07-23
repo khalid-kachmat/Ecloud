@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -33,9 +34,55 @@ class DoctorController extends Controller
                 'docCin' => $info['cin'],
                 'docPhone' => $info['phone'],
             );
-            array_push($result,$data);
+            array_push($result, $data);
         }
 
         return response()->json($result);
+    }
+
+    public function updateOrAddDoc(Request $request, Doctor $doctor, User $user)
+    {
+        $data = json_decode($request->getContent(), true);
+        if ($data['function'] === 'edit') {
+            $doc = array(
+                'doc_speciality' => $data['docSpeciality'],
+                'doc_service' => $data['serviceId'],
+            );
+            $usr = array(
+                'name' => $data['docFullName'],
+                'email' => $data['docEmail'],
+                'password' => $data['docPassword'],
+                'cin' => $data['docCin'],
+                'phone' => $data['docPhone'],
+            );
+            $doctor->updateOrAddDoc($doc, $data['docId']);
+            $user->updateOrAddUser($usr, $data['docUserId']);
+        } else {
+            $usr = array(
+                'name' => $data['docFullName'],
+                'email' => $data['docEmail'],
+                'password' => $data['docPassword'],
+                'cin' => $data['docCin'],
+                'type' => $data['type'],
+                'phone' => $data['docPhone'],
+
+            );
+            $user->updateOrAddUser($usr, 0);
+            $userId = $user->all()->last();
+            $doc = array(
+                'doc_user_id' => $userId->id,
+                'doc_speciality' => $data['docSpeciality'],
+                'doc_service' => $data['serviceId'],
+            );
+            $doctor->updateOrAddDoc($doc, 0);
+        }
+
+    }
+
+    public function deleteDoctor(Request $request, Doctor $doctor, User $user)
+    {
+        $data = json_decode($request->getContent() , true);
+        $user->deleteUser($data['docUserId']);
+        $doctor->deleteDoctor($data['docId']);
     }
 }

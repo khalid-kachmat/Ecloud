@@ -276,6 +276,7 @@ export default {
       assurance: '',
       patientNote: '',
       assuranceVisibility: '',
+
       error: 'All Field with * are requires',
       formVisibility: true,
       displayFormVisibility: true,
@@ -422,7 +423,7 @@ export default {
             patientNote: this.patientNote,
           })
         };
-        fetch('http://127.0.0.1:8000/api/addNewPatient', data);
+        fetch('http://127.0.0.1:8000/api/updateOrAdd', data);
         this.getPatientData()
         this.fetchAssuranceData()
         this.addVisibility = this.formVisibility = this.displayFormVisibility = this.displayVisibility = this.editVisibility = true

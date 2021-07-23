@@ -13,7 +13,7 @@
                      placeholder="Search by name...">
             </div>
             <div class="flex justify-end w-1/2	">
-              <button @click="addNewdoctor"
+              <button @click="addNewDoctor"
                       class=" flex item-center gap-2 w-30 px-8 py-2  bg-white hover:border-white shadow-lg rounded-xl hover:text-black text-gray-400 font-bold transition ease-in-out duration-700 ">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
                       </svg>
                     </div>
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                      <svg @click="editDoctor(row.docId,row.doctorAssurance)" xmlns="http://www.w3.org/2000/svg"
+                      <svg @click="editDoctor(row.docId,row.docService)" xmlns="http://www.w3.org/2000/svg"
                            fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -70,7 +70,7 @@
                       </svg>
                     </div>
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                      <svg @click="deletedoctor(row.doctorId,row.doctorFirst,row.doctorLast)"
+                      <svg @click="deleteDoctor(row.docId,row.docUserId,row.docFullName)"
                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -116,7 +116,7 @@
         *
        </span></label>
               <div class="flex items-center space-x-4">
-                <input @change="ageCalculator" v-model="docEmail" type="email" name="birthDate"
+                <input  v-model="docEmail" type="email" name="birthDate"
                        placeholder="admin@email.com"
                        class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
@@ -145,29 +145,36 @@
           </div>
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Note</label>
-              <textarea v-model="docNote" rows="4" name="note" id="note" placeholder="Note"
-                        class="px-4 py-2  w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
+              <label class="leading-loose font-semibold ">Speciality<span class="text-red-500">
+        *
+       </span></label>
+
+              <input v-model="docSpeciality" type="text" placeholder="Y563433"
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+
             </div>
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold p-2 ">Assurance</label>
-              <div class="flex items-center space-x-4">
-                <label>Yes</label>
-                <input type="radio" name="assuranceVisibility" v-model="assuranceVisibility" value="Yes" class="">
-                <label>No</label>
-                <input type="radio" v-model="assuranceVisibility" value="No" name="assuranceVisibility" class="">
+              <label class="leading-loose font-semibold ">Select Service</label>
+              <select @change="importServiceId" name="assurance" v-model="service"
+                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
-              </div>
+                <option v-bind:key="row.service_id" v-for="row in serviceData">{{ row.service_name }}</option>
+              </select>
             </div>
           </div>
-          <div class="flex w-1/2 flex-col justify-center" v-show="assuranceVisibility === 'Yes'">
-            <label class="leading-loose font-semibold ">Select Assurance Type</label>
-            <select @change="importAssuranceId" name="assurance" v-model="assurance"
-                    class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+          <div class="flex items-center  w-full py-4 space-x-4">
+            <div class="flex w-1/2 flex-col justify-center">
+              <label class="leading-loose font-semibold ">Password<span class="text-red-500">
+        *
+       </span></label>
 
-              <option v-bind:key="row.assurance_id" v-for="row in assurancesData">{{ row.assurance_name }}</option>
-            </select>
+              <input v-model="docPassword" type="text" placeholder=""
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+
+            </div>
+
           </div>
+
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
@@ -255,7 +262,8 @@ export default {
       docPassword: '',
       service: '',
       docPhone: '',
-
+      docUserId: '',
+      type: 'Doctor',
       serviceVisibility: '',
       error: 'All Field with * are requires',
       formVisibility: true,
@@ -302,14 +310,10 @@ export default {
     },
     importServiceId() {
       this.serviceData.forEach(item => {
-        if (item.assurance_name === this.assurance) {
-          this.assuranceId = item.assurance_id;
+        if (item.service_name === this.service) {
+          this.serviceId = item.service_id;
         }
       })
-    },
-    ageCalculator() {
-      let today = new Date
-      this.doctorAge = today.getUTCFullYear() - (new Date(this.doctorBirth).getUTCFullYear())
     },
     editDoctor(docId, docServiceId) {
       this.appointments = ''
@@ -330,14 +334,15 @@ export default {
           this.docEmail = item.docEmail;
           this.docPassword = item.docPassword;
           this.docPhone = item.docPhone;
+          this.docUserId = item.docUserId
 
 
         }
       })
-      this.servicesData.forEach(item => {
-        if (item.assurance_id == docServiceId) {
-          this.assurance = item.assurance_name;
-          this.assuranceId = item.assurance_id
+      this.serviceData.forEach(item => {
+        if (item.service_name === docServiceId) {
+          this.service = item.service_name;
+          this.serviceId = item.service_id
         }
       })
     },
@@ -358,7 +363,6 @@ export default {
           this.docPhone = item.docPhone;
 
 
-
         }
       })
       this.serviceData.forEach(item => {
@@ -367,60 +371,52 @@ export default {
           this.assuranceId = item.assurance_id
         }
       })
-      this.getdoctorAppointments(docId);
+
     },
-    addNewdoctor() {
+    addNewDoctor() {
       this.function = 'add'
-      if (this.doctorId === '') {
-        this.doctorId = 0
+      if (this.docId === '') {
+        this.docId = 0
       }
       this.addVisibility = false
       this.formVisibility = false
       this.displayFormVisibility = true
       this.displayVisibility = true;
       this.editVisibility = true
-      this.doctorFirst = this.doctorLast = this.doctorBirth = this.doctorId = this.doctorAge = this.assuranceId = this.doctorNote = this.doctorCin = this.assuranceVisibility = this.appointments = '';
+      this.docFullName = this.docEmail = this.docPassword = this.docId =  this.serviceId = this.service = this.docCin = this.docPhone = this.docSpeciality = '';
     },
     sendDataIntoDataBase() {
-      if (this.doctorFirst === '' || this.doctorLast === '' || this.doctorCin === '' || this.doctorBirth === '' || this.doctorAge === '' || this.assuranceVisibility === '' || this.assuranceId === '') {
+      if (this.docFullName === '' || this.docEmail === '' || this.docCin === '' || this.docPassword === '' || this.docPhone === '' || this.assurance === '' || this.assuranceId === '') {
         this.errorField = true
       } else {
         const data = {
           method: 'POST',
           body: JSON.stringify({
             function: this.function,
-            doctorId: this.doctorId,
-            assuranceId: this.assuranceId,
-            doctorFirst: this.doctorFirst,
-            doctorLast: this.doctorLast,
-            doctorCin: this.doctorCin,
-            doctorBirth: this.doctorBirth,
-            doctorAge: this.doctorAge,
-            assuranceVisibility: this.assuranceVisibility,
-            doctorNote: this.doctorNote,
+            docId: this.docId,
+            serviceId: this.serviceId,
+            docFullName: this.docFullName,
+            docCin: this.docCin,
+            docEmail: this.docEmail,
+            docSpeciality: this.docSpeciality,
+            docPhone: this.docPhone,
+            docPassword: this.docPassword,
+            docUserId : this.docUserId,
+            type : this.type,
           })
         };
-        fetch('http://127.0.0.1:8000/api/addNewdoctor', data);
-        this.getdoctorData()
-        this.fetchAssuranceData()
+        fetch('http://127.0.0.1:8000/api/updateOrAddDoc', data);
+        this.getDoctorData()
+        this.fetchServicesData()
         this.addVisibility = this.formVisibility = this.displayFormVisibility = this.displayVisibility = this.editVisibility = true
 
       }
 
     },
-    getdoctorAppointments(id) {
-      let data = {
-        method: 'POST',
-        body: id
-      }
-      fetch('http://127.0.0.1:8000/api/appointmentPerdoctor', data)
-          .then(res => res.json())
-          .then(data => this.appointments = data)
-    },
-    deletedoctor(id, first, last) {
+    deleteDoctor(id, userId, fullName) {
       this.$swal.fire({
         title: 'Do you want to Delete this ?',
-        text: first + ' ' + last,
+        text: fullName,
         showDenyButton: true,
         showCancelButton: true,
         showConfirmButton: false,
@@ -429,11 +425,14 @@ export default {
         if (result.isDenied) {
           let data = {
             method: 'POST',
-            body: id
+            body: JSON.stringify({
+              docId: id,
+              docUserId: userId
+            })
           }
-          fetch('http://127.0.0.1:8000/api/deletedoctor', data)
+          fetch('http://127.0.0.1:8000/api/deleteDoctor', data)
           this.$swal.fire('Deleted!', '', 'success')
-          this.getdoctorData()
+          this.getDoctorData()
         }
       })
     }
