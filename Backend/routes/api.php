@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AssuranceController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,15 @@ Route::post('updateOrAddDoc', [DoctorController::class, 'updateOrAddDoc']);
 
 //delete doctor
 Route::post('deleteDoctor', [DoctorController::class, 'deleteDoctor']);
+
+//secretaries Data
+Route::get('secInfo' ,[SecretaryController::class, 'secretariesInfo']);
+
+//add or edit secretaries
+Route::post('updateOrAddSec', [SecretaryController::class, 'updateOrAddSec'] );
+
+//delete secretary
+Route::post('deleteSecretary', [SecretaryController::class, 'deleteSecretary']);
 
 // assurance api for importing assurances data from assurance table
 Route::get('assurances',[AssuranceController::class, 'importAssuranceData']);

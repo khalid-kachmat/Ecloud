@@ -1,25 +1,25 @@
 <template>
 
 
+  <div>
 
 
-      <section id="calendarSection" class=" flex my-10 md:ml-10  justify-center gap-20 ">
+
+
+
+      <section id="calendarSection" class="flex my-10 md:ml-10 justify-center">
 
         <FullCalendar id="fullCalendar"
-                      class="test bg-white p-4 rounded-xl shadow-xl xl:w-2/5 font-semibold text-gray-500"
+                      class="w-11/12 bg-white p-4 rounded-xl shadow-xl  font-semibold text-gray-500"
                       @select="handleSelect" :options="calendarOptions"/>
-        <div id="appointmentForm" class="w-1/2 h-2/3 ">
-          <AppointmentForm :start="start" :end="end" :endDate="endDate" :endTime="endTime"
-                           :startDate="startDate"
-                           :startTime="startTime"/>
-        </div>
+
       </section>
 
-
+  </div>
 </template>
 
 <script>
-import AppointmentForm from "@/components/AppointmentForm";
+
 import '@fullcalendar/core/vdom'
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -29,7 +29,6 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 export default {
   components: {
     FullCalendar,
-    AppointmentForm
   },
   props: {
     msg: String,

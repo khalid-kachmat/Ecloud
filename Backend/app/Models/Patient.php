@@ -43,5 +43,10 @@ class Patient extends Model
             ->delete();
     }
 
+    public function patientAppointments(Patient $patient, Appointment $appointment)
+    {
+        $patient->hasMany($appointment);
+    }
+
 
 }

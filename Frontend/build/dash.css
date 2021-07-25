@@ -217,7 +217,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
 @media only screen and (max-width: 1280px) {
     main {
         position: relative;
-        height: 88vh;
+        height: 84vh;
         margin: 0;
         width: 100%;
     }
@@ -268,7 +268,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
 @media only screen and (max-width: 900px) {
     main {
         position: relative;
-        height: 88vh;
+        height: 84vh;
         width: 100%;
         margin: 0;
     }
@@ -351,7 +351,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
     }
     main {
         position: relative;
-        height: 88vh;
+        height: 84vh;
         margin: 0;
         width: 100%;
 

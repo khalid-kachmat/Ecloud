@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    public function importPatientsData(): array|Collection
+    public function importPatientsData(Patient $patient): array|Collection
     {
-        return (new Patient)->getAllPatientData();
+        return $patient->getAllPatientData();
     }
 
     public function patientDataAppNbr(): array

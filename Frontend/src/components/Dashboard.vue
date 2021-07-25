@@ -74,6 +74,8 @@
 import Table from "./Patient";
 import Users from "../components/Users";
 import Patient from "@/components/Patient";
+import Home from "@/components/Home";
+import Calendar from "@/components/Calendar";
 
 
 export default {
@@ -86,7 +88,8 @@ export default {
     Table,
     Users,
     Patient,
-
+    Home,
+    Calendar,
   }
 }
 </script>

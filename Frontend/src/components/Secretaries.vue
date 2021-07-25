@@ -13,7 +13,7 @@
                      placeholder="Search by name...">
             </div>
             <div class="flex justify-end w-1/2	">
-              <button @click="addNewdoctor"
+              <button @click="addNewSecretary"
                       class=" flex item-center gap-2 w-30 px-8 py-2  bg-white hover:border-white shadow-lg rounded-xl hover:text-black text-gray-400 font-bold transition ease-in-out duration-700 ">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
@@ -31,29 +31,29 @@
                 <th class="py-3 px-6 text-left">Full Name</th>
                 <th class="py-3 px-6 text-left">Email</th>
                 <th class="py-3 px-6 text-center">Password</th>
-                <th class="py-3 px-6 text-center">Speciality</th>
+                <th class="py-3 px-6 text-center">Cin</th>
                 <th class="py-3 px-6 text-center">Actions</th>
               </tr>
               </thead>
-              <tbody v-for="(row) in  filter" :key="row.doctorId"
+              <tbody v-for="(row) in  filter" :key="row.secr_id"
                      class="text-gray-600 bg-white text-sm font-semibold rounded-xl font-light">
               <tr class="border-b border-gray-200 hover:bg-gray-100">
                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                  {{ row.docFullName }}
+                  {{ row.name }}
                 </td>
                 <td class="py-3 px-6 text-left">
-                  {{ row.docEmail }}
+                  {{ row.email }}
                 </td>
                 <td class="py-3 px-6 text-center">
-                  {{ row.docPassword }}
+                  {{ row.password }}
                 </td>
                 <td class="py-3 px-6 text-center">
-                  {{ row.docSpeciality }}
+                  {{ row.cin }}
                 </td>
                 <td class="py-3 px-6 text-center">
                   <div class="flex item-center justify-center">
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                      <svg @click="displayDoctor(row.docId,row.docService)" xmlns="http://www.w3.org/2000/svg"
+                      <svg @click="displaySecretary(row.secr_id)" xmlns="http://www.w3.org/2000/svg"
                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -62,7 +62,7 @@
                       </svg>
                     </div>
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                      <svg @click="editdoctor(row.doctorId,row.doctorAssurance)" xmlns="http://www.w3.org/2000/svg"
+                      <svg @click="editSecretary(row.secr_id)" xmlns="http://www.w3.org/2000/svg"
                            fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -70,7 +70,7 @@
                       </svg>
                     </div>
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
-                      <svg @click="deletedoctor(row.doctorId,row.doctorFirst,row.doctorLast)"
+                      <svg @click="deleteSecretary(row.secr_id,row.user_id,row.name)"
                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -93,46 +93,44 @@
       <div class="w-full ">
         <div class="flex justify-center my-5 font-semibold text-gray-500 ">
 
-          <h1 :class="displayVisibility ? 'hidden' : 'block'"><span>doctor Information</span></h1>
-          <h1 :class="editVisibility ? 'hidden' : 'block'"><span>Edit doctor Information</span></h1>
-          <h1 :class="addVisibility ? 'hidden' : 'block'"><span>Add new doctor</span></h1>
+          <h1 :class="displayVisibility ? 'hidden' : 'block'"><span>secretary Information</span></h1>
+          <h1 :class="editVisibility ? 'hidden' : 'block'"><span>Edit secretary Information</span></h1>
+          <h1 :class="addVisibility ? 'hidden' : 'block'"><span>Add new secretary</span></h1>
         </div>
+        <!--        edit and add form-->
         <form @submit.prevent="sendDataIntoDataBase" class=" bg-white rounded-xl p-4"
               :class="formVisibility ? 'hidden' : 'block'">
 
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">First Name<span class="text-red-500">
+              <label class="leading-loose font-semibold ">Full Name<span class="text-red-500">
         *
        </span></label>
-              <input v-model="doctorFirst" type="text" name="firstName"
+              <input v-model="secFullName" type="text" name="firstName" placeholder="Enter First Name"
                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
-            <input name="doctor_id" hidden v-model="doctorId">
-            <input name="assurance_id" hidden v-model="assuranceId">
+            <input name="secretary_id" hidden v-model="secId">
+            <input name="assurance_id" hidden v-model="secUserId">
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Date of birth<span class="text-red-500">
+              <label class="leading-loose font-semibold ">Email<span class="text-red-500">
         *
        </span></label>
               <div class="flex items-center space-x-4">
-                <input @change="ageCalculator" v-model="doctorBirth" type="date" name="birthDate"
-                       class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                <input  v-model="secEmail" type="email" name="birthDate"
+                        placeholder="admin@email.com"
+                        class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               </div>
             </div>
-            <div class="flex flex-col 1/4 justify-center">
-              <label class="leading-loose font-semibold ">Age</label>
-              <input v-model="doctorAge" type="number" readonly name="age"
-                     class="px-4 py-2 cursor-default w-16 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
-            </div>
+
 
           </div>
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Last Name<span class="text-red-500">
+              <label class="leading-loose font-semibold ">Phone Number<span class="text-red-500">
         *
        </span></label>
-              <input v-model="doctorLast" type="text"
+              <input v-model="secPhone" type="text" placeholder="0666666666"
                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
             <div class="flex w-1/2 flex-col justify-center">
@@ -140,36 +138,25 @@
         *
        </span></label>
 
-              <input v-model="doctorCin" type="text"
+              <input v-model="secCin" type="text" placeholder="Y563433"
                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
             </div>
           </div>
-          <div class="flex items-center justify-center w-full py-4 space-x-4">
-            <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Note</label>
-              <textarea v-model="doctorNote" rows="4" name="note" id="note" placeholder="Note"
-                        class="px-4 py-2  w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
-            </div>
-            <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold p-2 ">Assurance</label>
-              <div class="flex items-center space-x-4">
-                <label>Yes</label>
-                <input type="radio" name="assuranceVisibility" v-model="assuranceVisibility" value="Yes" class="">
-                <label>No</label>
-                <input type="radio" v-model="assuranceVisibility" value="No" name="assuranceVisibility" class="">
 
-              </div>
-            </div>
-          </div>
-          <div class="flex w-1/2 flex-col justify-center" v-show="assuranceVisibility === 'Yes'">
-            <label class="leading-loose font-semibold ">Select Assurance Type</label>
-            <select @change="importAssuranceId" name="assurance" v-model="assurance"
-                    class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+          <div class="flex items-center  w-full py-4 space-x-4">
+            <div class="flex w-1/2 flex-col justify-center">
+              <label class="leading-loose font-semibold ">Password<span class="text-red-500">
+        *
+       </span></label>
 
-              <option v-bind:key="row.assurance_id" v-for="row in assurancesData">{{ row.assurance_name }}</option>
-            </select>
+              <input v-model="secPassword" type="text" placeholder=""
+                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+
+            </div>
+
           </div>
+
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
@@ -179,19 +166,22 @@
             <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
           </div>
         </form>
+        <!--        edit and add form-->
+
+        <!--        displaying users data-->
         <div class=" bg-white rounded-xl p-4 w-full" :class="displayFormVisibility ? 'hidden' : 'block'">
 
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Full Name</label>
-              <input v-model="docFullName" type="text" readonly
+              <input v-model="secFullName" type="text" readonly
                      class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
 
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Email</label>
               <div class="flex items-center space-x-4">
-                <input readonly v-model="docEmail" type="text"
+                <input readonly v-model="secEmail" type="text"
                        class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
               </div>
@@ -199,41 +189,24 @@
 
 
           </div>
+
           <div class="flex items-center justify-center w-full py-4 space-x-4">
             <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Speciality</label>
-              <input v-model="docSpeciality" type="text" readonly
+              <label class="leading-loose font-semibold ">Phone</label>
+              <input v-model="secPhone" type="text" readonly
                      class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Cin</label>
 
-              <input v-model="doctorCin" type="text" readonly
+              <input v-model="secCin" type="text" readonly
                      class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
             </div>
           </div>
-          <div class="flex items-center justify-center w-full py-4 space-x-4">
-            <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold ">Note</label>
-              <textarea v-model="doctorNote" readonly
-                        class="px-4 py-2 cursor-default w-full sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md "></textarea>
-            </div>
-            <div class="flex w-1/2 flex-col justify-center">
-              <label class="leading-loose font-semibold p-2 ">Service</label>
-              <div class="flex items-center space-x-4">
-                <input type="text" readonly v-model="assuranceVisibility"
-                       class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
-              </div>
-            </div>
-          </div>
-          <div class="flex w-1/2 flex-col justify-center" v-show="assuranceVisibility === 'Yes'">
-            <label class="leading-loose font-semibold ">Assurance Type</label>
-            <input v-model="assurance" readonly
-                   class="px-4 py-2 cursor-default  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
-          </div>
-
         </div>
+        <!--        displaying users data-->
+
       </div>
     </div>
   </div>
@@ -247,16 +220,14 @@ export default {
     return {
       //variables
       search: '',
-      docFullName: '',
-      docEmail: '',
-      docCin: '',
-      docSpeciality: '',
-      serviceId: '',
-      docId: '',
-      docPassword:'',
-      service: '',
-
-      serviceVisibility: '',
+      secFullName: '',
+      secEmail: '',
+      secCin: '',
+      secId: '',
+      secPassword: '',
+      secPhone: '',
+      secUserId: '',
+      type: 'secretary',
       error: 'All Field with * are requires',
       formVisibility: true,
       displayFormVisibility: true,
@@ -268,50 +239,31 @@ export default {
 
 
       //objects
-      doctorsData: '',
-      serviceData: '',
-      appointments: '',
+      secretariesData: '',
     }
   },
   computed: {
     filter() {
-      const data = this.doctorsData
+      const data = this.secretariesData
       return data && data.filter(item => {
-        return item.docFullName.includes(this.search) || item.docEmail.includes(this.search)
+        return item.name.includes(this.search) || item.cin.includes(this.search)
       })
     }
   },
 
   mounted() {
-    this.getDoctorData()
-    this.fetchAssuranceData()
+    this.getSecretaryData()
   },
   methods: {
-    getDoctorData() {
-      fetch('http://127.0.0.1:8000/api/docInfo', {
+    getSecretaryData() {
+      fetch('http://127.0.0.1:8000/api/secInfo', {
         method: 'get'
       }).then(res => res.json())
-          .then(data => this.doctorsData = data)
+          .then(data => this.secretariesData = data)
     },
-    fetchAssuranceData() {
-      fetch('http://127.0.0.1:8000/api/assurances', {
-        method: 'get'
-      })
-          .then(res => res.json())
-          .then(data => this.assurancesData = data)
-    },
-    importAssuranceId() {
-      this.assurancesData.forEach(item => {
-        if (item.assurance_name === this.assurance) {
-          this.assuranceId = item.assurance_id;
-        }
-      })
-    },
-    ageCalculator() {
-      let today = new Date
-      this.doctorAge = today.getUTCFullYear() - (new Date(this.doctorBirth).getUTCFullYear())
-    },
-    editDoctor(docId, docServiceId) {
+
+
+    editSecretary(secId) {
       this.appointments = ''
       this.function = 'edit'
       this.formVisibility = false;
@@ -321,102 +273,83 @@ export default {
       this.displayFormVisibility = true
 
 
-      this.doctorsData.forEach(item => {
-        if (item.doctorId == docId) {
-          this.doctorId = item.doctorId
-          this.docFullName = item.docFullName;
-          this.docCin = item.docCin;
-          this.docSpeciality = item.docSpeciality;
-          this.docEmail = item.docEmail;
-          this.docPassword = item.docPassword;
+      this.secretariesData.forEach(item => {
+        if (item.secr_id == secId) {
+          this.secId = item.secr_id
+          this.secFullName = item.name;
+          this.secCin = item.cin;
+          this.secEmail = item.email;
+          this.secPassword = item.password;
+          this.secPhone = item.phone;
+          this.secUserId = item.user_id
 
 
-        }
-      })
-      this.servicesData.forEach(item => {
-        if (item.assurance_id == docServiceId) {
-          this.assurance = item.assurance_name;
-          this.assuranceId = item.assurance_id
         }
       })
     },
-    displayDoctor(docId, docServiceId) {
+    displaySecretary(secId) {
       this.displayFormVisibility = false
       this.displayVisibility = false
       this.editVisibility = true;
       this.addVisibility = true
       this.formVisibility = true
-      this.doctorsData.forEach(item => {
-        if (item.docId == docId) {
-          this.docFullName = item.docFullName;
-          this.docEmail = item.docEmail;
-          this.docCin = item.docCin;
-          this.docSpeciality = item.docSpeciality;
-          this.docPassword = item.docPassword;
+      this.secretariesData.forEach(item => {
+        if (item.secr_id == secId) {
+          this.secFullName = item.name;
+          this.secEmail = item.email;
+          this.secCin = item.cin;
+          this.secPassword = item.password;
+          this.secPhone = item.phone;
+          this.secUserId = item.user_id;
+          this.secId = item.secr_id;
 
 
         }
       })
-      this.serviceData.forEach(item => {
-        if (item.assurance_id == docServiceId) {
-          this.assurance = item.assurance_name;
-          this.assuranceId = item.assurance_id
-        }
-      })
-      this.getdoctorAppointments(docId);
     },
-    addNewdoctor() {
+    addNewSecretary() {
       this.function = 'add'
-      if (this.doctorId === '') {
-        this.doctorId = 0
+      if (this.secId === '') {
+        this.secId = 0
       }
       this.addVisibility = false
       this.formVisibility = false
       this.displayFormVisibility = true
       this.displayVisibility = true;
       this.editVisibility = true
-      this.doctorFirst = this.doctorLast = this.doctorBirth = this.doctorId = this.doctorAge = this.assuranceId = this.doctorNote = this.doctorCin = this.assuranceVisibility = this.appointments = '';
+      this.secFullName = this.secEmail = this.secPassword = this.secId =  this.serviceId = this.service = this.secCin = this.secPhone = this.secSpeciality = '';
     },
     sendDataIntoDataBase() {
-      if (this.doctorFirst === '' || this.doctorLast === '' || this.doctorCin === '' || this.doctorBirth === '' || this.doctorAge === '' || this.assuranceVisibility === '' || this.assuranceId === '') {
+      if (this.secFullName === '' || this.secEmail === '' || this.secCin === '' || this.secPassword === '' || this.secPhone === '' || this.assurance === '' || this.assuranceId === '') {
         this.errorField = true
       } else {
         const data = {
           method: 'POST',
           body: JSON.stringify({
             function: this.function,
-            doctorId: this.doctorId,
-            assuranceId: this.assuranceId,
-            doctorFirst: this.doctorFirst,
-            doctorLast: this.doctorLast,
-            doctorCin: this.doctorCin,
-            doctorBirth: this.doctorBirth,
-            doctorAge: this.doctorAge,
-            assuranceVisibility: this.assuranceVisibility,
-            doctorNote: this.doctorNote,
+            secId: this.secId,
+            serviceId: this.serviceId,
+            secFullName: this.secFullName,
+            secCin: this.secCin,
+            secEmail: this.secEmail,
+            secSpeciality: this.secSpeciality,
+            secPhone: this.secPhone,
+            secPassword: this.secPassword,
+            secUserId : this.secUserId,
+            type : this.type,
           })
         };
-        fetch('http://127.0.0.1:8000/api/addNewdoctor', data);
-        this.getdoctorData()
-        this.fetchAssuranceData()
+        fetch('http://127.0.0.1:8000/api/updateOrAddSec', data);
+        this.getSecretaryData()
         this.addVisibility = this.formVisibility = this.displayFormVisibility = this.displayVisibility = this.editVisibility = true
 
       }
 
     },
-    getdoctorAppointments(id) {
-      let data = {
-        method: 'POST',
-        body: id
-      }
-      fetch('http://127.0.0.1:8000/api/appointmentPerdoctor', data)
-          .then(res => res.json())
-          .then(data => this.appointments = data)
-    },
-    deletedoctor(id, first, last) {
+    deleteSecretary(id, userId, fullName) {
       this.$swal.fire({
         title: 'Do you want to Delete this ?',
-        text: first + ' ' + last,
+        text: fullName,
         showDenyButton: true,
         showCancelButton: true,
         showConfirmButton: false,
@@ -425,11 +358,14 @@ export default {
         if (result.isDenied) {
           let data = {
             method: 'POST',
-            body: id
+            body: JSON.stringify({
+              secId: id,
+              secUserId: userId
+            })
           }
-          fetch('http://127.0.0.1:8000/api/deletedoctor', data)
+          fetch('http://127.0.0.1:8000/api/deleteSecretary', data)
           this.$swal.fire('Deleted!', '', 'success')
-          this.getdoctorData()
+          this.getSecretaryData()
         }
       })
     }

@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
-    public function importDoctorsData(): Collection
+    public function importDoctorsData(Doctor $doctor): Collection
     {
-        return (new Doctor)->importDocData();
+        return $doctor->importDocData();
     }
 
     public function doctorInfo(Doctor $doctor, User $user, Service $service): JsonResponse
