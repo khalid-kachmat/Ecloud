@@ -3,11 +3,11 @@
 
   <div class="w-full   ">
 
-    <div class="flex justify-center xl:w-3/4 my-5 font-semibold text-gray-500 ">
+    <div class="flex justify-center xl:w-11/12 my-5 font-semibold text-gray-500 ">
       <h1 class=""><span>Appointment Details</span></h1>
     </div>
 
-    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-white xl:w-3/4 p-4 shadow-xl">
+    <form @submit.prevent="sendDataIntoDataBase" class=" rounded-xl  bg-white xl:w-11/12 p-4 shadow-xl">
       <div><span style="color:red" v-show="errorField">{{ error }}</span>
         <div class="flex justify-center items-center w-full space-y-5 space-x-12">
           <div class="flex w-1/2 flex-col justify-center">
@@ -16,6 +16,7 @@
        </span></label>
             <select @change="importServiceId" v-model="service" name="service"
                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+              <option disabled selected>Select Service</option>
 
               <option v-bind:key="row.service_id" v-for="row in servicesData">{{ row.service_name }}</option>
             </select>

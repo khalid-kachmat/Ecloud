@@ -4,16 +4,39 @@
   <div>
 
 
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 py-8 mx-auto">
+        <div class="flex flex-wrap  text-center">
+          <div class="p-4 sm:w-1/4 w-1/2">
+
+            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ statistic.appointments }}</h2>
+            <p class="leading-relaxed">Total Appointments</p>
+
+          </div>
+          <div class="p-4 sm:w-1/4 w-1/2">
+            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ statistic.appointmentsToday }}</h2>
+            <p class="leading-relaxed">Appointments Today</p>
+          </div>
+          <div class="p-4 sm:w-1/4 w-1/2">
+            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ statistic.patients }}</h2>
+            <p class="leading-relaxed">Patients Registered</p>
+          </div>
+          <div class="p-4 sm:w-1/4 w-1/2">
+            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ statistic.doctors }}</h2>
+            <p class="leading-relaxed">Doctors</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
+    <section id="calendarSection" class="flex my-10 md:ml-10 justify-center">
 
-      <section id="calendarSection" class="flex my-10 md:ml-10 justify-center">
+      <FullCalendar id="fullCalendar"
+                    class="w-11/12 bg-white p-4 rounded-xl shadow-xl  font-semibold text-gray-500"
+                    @select="handleSelect" :options="calendarOptions"/>
 
-        <FullCalendar id="fullCalendar"
-                      class="w-11/12 bg-white p-4 rounded-xl shadow-xl  font-semibold text-gray-500"
-                      @select="handleSelect" :options="calendarOptions"/>
-
-      </section>
+    </section>
 
   </div>
 </template>
@@ -42,6 +65,7 @@ export default {
       endTime: '',
       end: '',
       start: '',
+      statistic: '',
       appEventsData: '',
       calendarOptions: {
         plugins: [
@@ -78,7 +102,7 @@ export default {
         longPressDelay: 100,
         eventColor: "#a9b1bb",
         eventTextColor: 'black',
-        height: "90vh",
+        height: "72vh",
         themeSystem: "Minty",
 
         eventTimeFormat: { // like '14:30:00'
@@ -108,6 +132,7 @@ export default {
   computed: {},
   mounted() {
     this.getAppointmentData()
+    this.statistics()
   },
   methods: {
     handleSelect: function (item) {
@@ -180,6 +205,16 @@ export default {
       }
       fetch('http://127.0.0.1:8000/api/deleteAppointment', data)
       location.reload()
+
+    },
+    statistics() {
+      let today = (new Date).toISOString().slice(0, 10)
+      fetch('http://127.0.0.1:8000/api/statistics',{
+        method: 'Post',
+        body: today
+      })
+          .then(res => res.json())
+          .then(data => this.statistic = data)
 
     }
   }

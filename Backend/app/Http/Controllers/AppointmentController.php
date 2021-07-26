@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Slots;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -61,29 +64,46 @@ class AppointmentController extends Controller
     }
 
 
-    public function sentAppointmentData(): JsonResponse
+    public function sentAppointmentData(Slots $slots, Appointment $appointment, User $user, Patient $patient, Doctor $doctor): JsonResponse
     {
-        $test = (new Slots)->getSlotsForAppointment();
+        $test = $slots->getSlotsForAppointment();
         $result = array();
         foreach ($test as $row) {
-            $appointment = (new Appointment)->getPatientId($row['slot_app_id']);
-            $patient = (new Patient)->getPatientById($appointment['app_patient_id']);
+            $appointments = $appointment->getPatientId($row['slot_app_id']);
+            $patients = $patient->getPatientById($appointments['app_patient_id']);
+            $doc = $doctor->all()->where('doc_id', '=', $appointments['app_doc_id'])->first();
+            $usr = $user->all()->where('id', '=', $doc->doc_user_id)->first();
 
             $data = array(
                 'id' => $row['slot_app_id'],
-                'title' => $patient['patient_first_name'] . ' ' . $patient['patient_last_name'],
+                'title' => $patients['patient_first_name'] . ' ' . $patients['patient_last_name'] . ' ' . ' __ ' . 'Doctor: ' . $usr->name,
                 'start' => $row['start'],
                 'end' => $row['end']
             );
             array_push($result, $data);
         }
         return response()->json($result);
-
     }
 
     public function deleteAppointment(Request $request, Appointment $appointment, Slots $slots)
     {
         $appointment->deleteAppointment($request->getContent());
-         $slots->deleteSlot($request->getContent());
+        $slots->deleteSlot($request->getContent());
+    }
+
+    public function statistics(Request $request, Appointment $appointment, User $user, Patient $patient): JsonResponse
+    {
+        $app = $appointment->all()->count();
+        $usr = $user->all()->where('type', '=', 'Doctor')->count();
+        $patients = $patient->all()->count();
+        $appToday = $appointment->all()->where('app_start_date', '=', $request->getContent())->count();
+
+        $result = array(
+            'appointments' => $app,
+            'doctors' => $usr,
+            'patients' => $patients,
+            'appointmentsToday' => $appToday,
+        );
+        return response()->json($result);
     }
 }

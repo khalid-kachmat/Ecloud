@@ -1,11 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from "@/components/Dashboard";
+import Login from "@/components/Login";
 
 Vue.use(VueRouter)
 
 const routes = [
 
+    {
+        path: '/login',
+        name: 'login',
+        component: Login,
+    },
+
+    {
+        path: '/',
+        name: 'Dash',
+        component: Dashboard,
+        props: {
+            content: 'Home'
+        }
+    },
     {
         path: '/patients',
         name: 'Dash',
@@ -31,13 +46,14 @@ const routes = [
         }
     },
     {
-        path: '/',
+        path: '/Others',
         name: 'Dash',
         component: Dashboard,
         props: {
-            content: 'Home'
+            content: 'Others'
         }
     },
+
 ]
 
 const router = new VueRouter({

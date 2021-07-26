@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
@@ -64,5 +65,10 @@ class User extends Authenticatable
         DB::table('users')
             ->where('id', '=', $id)
             ->delete();
+    }
+
+    public function login()
+    {
+
     }
 }

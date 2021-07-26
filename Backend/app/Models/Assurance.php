@@ -17,6 +17,19 @@ class Assurance extends Model
             ->select('assurance_name')
             ->where('assurance_id', '=', $id)
             ->get();
-//        return Assurance::all()->where('assurance_id', '=', $id);
+    }
+
+    public function updateOrAddAssurance($result, $id)
+    {
+        DB::table('assurances')
+            ->updateOrInsert(['assurance_id' => $id], $result);
+
+    }
+
+    public function deleteAssurance($id)
+    {
+        DB::table('assurances')
+            ->where('assurance_id', '=', $id)
+            ->delete();
     }
 }

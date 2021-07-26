@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,11 +44,23 @@ Route::post('deleteSecretary', [SecretaryController::class, 'deleteSecretary']);
 // assurance api for importing assurances data from assurance table
 Route::get('assurances',[AssuranceController::class, 'importAssuranceData']);
 
+//add or update Services
+Route::post('updateOrAddAssurance', [AssuranceController::class, 'updateOrAddAssurance']);
+
+//delete Service
+Route::post('deleteAssurance', [AssuranceController::class, 'deleteAssurance']);
+
 // doctor api for importing doctors data for doctor table
 Route::get('getDocData', [DoctorController::class, 'importDoctorsData']);
 
 //services api for importing services data for services table
 Route::get('services',[ServiceController::class , 'importServicesData']);
+
+//add or update Services
+Route::post('updateOrAddServ', [ServiceController::class, 'updateOrAddServ']);
+
+//delete Service
+Route::post('deleteService', [ServiceController::class, 'deleteService']);
 
 // receiving Post data from the vue js form
 Route::post('getAppointmentData',[AppointmentController::class, 'getAppointmentData']);
@@ -65,3 +78,9 @@ Route::post('updateOrAdd', [PatientController::class, 'updateOrAdd']);
 Route::post('deletePatient', [PatientController::class, 'deletePatient']);
 
 Route::post('appointmentPerPatient', [PatientController::class, 'getAppointmentDataPerPatient']);
+
+//statistics
+Route::post('statistics', [AppointmentController::class, 'statistics']);
+
+//login
+Route::post('login', [UsersController::class, 'login']);

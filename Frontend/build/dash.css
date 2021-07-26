@@ -7,7 +7,9 @@ main {
     border-radius: 40px 40px 40px;
     overflow-x: hidden;
 }
-
+.bg{
+    background-color: rgb(243, 243, 243);
+}
 .navbar {
     opacity: 1;
     background-color: rgb(209, 213, 219);
@@ -217,7 +219,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
 @media only screen and (max-width: 1280px) {
     main {
         position: relative;
-        height: 84vh;
+        height: 88vh;
         margin: 0;
         width: 100%;
     }
@@ -268,7 +270,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
 @media only screen and (max-width: 900px) {
     main {
         position: relative;
-        height: 84vh;
+        height: 88vh;
         width: 100%;
         margin: 0;
     }
@@ -351,7 +353,7 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
     }
     main {
         position: relative;
-        height: 84vh;
+        height: 88vh;
         margin: 0;
         width: 100%;
 
