@@ -4,14 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Secretary;
 use App\Models\User;
-use Illuminate\Support\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SecretaryController extends Controller
 {
-    public function secretariesInfo(Secretary $secretary): Collection
+    public function secretariesInfo(Secretary $secretary, User $user): JsonResponse
     {
-        return $secretary->secretariesInfo();
+        $sec = $secretary->all();
+        $result = array();
+        foreach ($sec as $row) {
+            $eachOne = $user->all()->where('id', '=', $row->user_id)->first();
+            $data = array(
+                'secr_id' => $row->secr_id,
+                'user_id' => $row->user_id,
+                'name' => $eachOne->name,
+                'email' => $eachOne->email,
+                'password' => Crypt::decryptString($eachOne->password),
+                'cin' => $eachOne->cin,
+                'phone' => $eachOne->phone,
+            );
+
+            array_push($result, $data);
+        }
+        return response()->json($result);
+
     }
 
     public function updateOrAddSec(Request $request, Secretary $secretary, User $user)
@@ -22,7 +40,7 @@ class SecretaryController extends Controller
             $usr = array(
                 'name' => $data['secFullName'],
                 'email' => $data['secEmail'],
-                'password' => $data['secPassword'],
+                'password' => Crypt::encryptString($data['secPassword']),
                 'cin' => $data['secCin'],
                 'phone' => $data['secPhone'],
             );
@@ -31,7 +49,7 @@ class SecretaryController extends Controller
             $usr = array(
                 'name' => $data['secFullName'],
                 'email' => $data['secEmail'],
-                'password' => $data['secPassword'],
+                'password' => Crypt::encryptString($data['secPassword']),
                 'cin' => $data['secCin'],
                 'type' => $data['type'],
                 'phone' => $data['secPhone'],
@@ -48,7 +66,7 @@ class SecretaryController extends Controller
 
     public function deleteSecretary(Request $request, Secretary $secretary, User $user)
     {
-        $data = json_decode($request->getContent() , true);
+        $data = json_decode($request->getContent(), true);
         $user->deleteUser($data['secUserId']);
         $secretary->deleteSecretary($data['secId']);
     }

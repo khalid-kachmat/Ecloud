@@ -11,13 +11,7 @@ class Secretary extends Model
 {
     use HasFactory;
 
-    public function secretariesInfo(): Collection
-    {
-        return DB::table('secretaries')
-            ->join('users', 'id', '=', 'user_id')
-            ->select('name', 'email', 'password', 'cin', 'phone', 'doc_id', 'user_id', 'secr_id')
-            ->get();
-    }
+
 
     public function updateOrAddSec($result, $id)
     {

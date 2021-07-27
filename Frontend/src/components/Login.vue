@@ -64,7 +64,7 @@ export default {
         this.errorField = true;
       } else {
         let data = {
-          method: 'Post',
+          method: 'POST',
           body: JSON.stringify({
             email: this.email,
             password: this.password
