@@ -3,24 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
     /**
-     * @throws ValidationException
+     *
      */
-    public function login(Request $request, User $user)
+    public function login(Request $request, User $user): Response|Application|ResponseFactory
     {
         $data = json_decode($request->getContent(), true);
 
-        if (!Auth::attempt($request->only('email', 'password'))){
-            echo 'invalid email or password';
-        }else{
-            echo 'yes';
+
+
+        // Check email
+        $user = $user->all()->where('email', $data['email'])->first();
+
+        // Check password
+        if(!$user || !Hash::check($data['password'], $user->password)) {
+            return response([
+                'message' => 'failed'
+            ], 401);
         }
-//        echo $request->getContent();
+
+        $token = $user->createToken('mapped')->plainTextToken;
+
+        $response = [
+            'message' => 'success',
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 }

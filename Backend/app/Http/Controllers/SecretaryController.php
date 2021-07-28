@@ -6,7 +6,7 @@ use App\Models\Secretary;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class SecretaryController extends Controller
 {
@@ -21,7 +21,7 @@ class SecretaryController extends Controller
                 'user_id' => $row->user_id,
                 'name' => $eachOne->name,
                 'email' => $eachOne->email,
-                'password' => Crypt::decryptString($eachOne->password),
+                'password' => $eachOne->password,
                 'cin' => $eachOne->cin,
                 'phone' => $eachOne->phone,
             );
@@ -40,7 +40,7 @@ class SecretaryController extends Controller
             $usr = array(
                 'name' => $data['secFullName'],
                 'email' => $data['secEmail'],
-                'password' => Crypt::encryptString($data['secPassword']),
+                'password' => Hash::make($data['secPassword']),
                 'cin' => $data['secCin'],
                 'phone' => $data['secPhone'],
             );
@@ -49,7 +49,7 @@ class SecretaryController extends Controller
             $usr = array(
                 'name' => $data['secFullName'],
                 'email' => $data['secEmail'],
-                'password' => Crypt::encryptString($data['secPassword']),
+                'password' => Hash::make($data['secPassword']),
                 'cin' => $data['secCin'],
                 'type' => $data['type'],
                 'phone' => $data['secPhone'],

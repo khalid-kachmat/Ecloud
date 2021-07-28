@@ -36,6 +36,7 @@
               type="submit">Sign In
           </button>
           <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
+          <span class="m-4 text-red-500" v-show="errorFieldLogin">{{ loginError }}</span>
         </form>
       </section>
     </div>
@@ -51,7 +52,9 @@ export default {
       email: '',
       password: '',
       error: 'All Field with * are requires',
+      loginError: 'email or password is incorrect',
       errorField: false,
+      errorFieldLogin: false,
 
 
       //objects
@@ -73,6 +76,18 @@ export default {
         fetch('http://127.0.0.1:8000/api/login', data)
             .then(res => res.json())
             .then(data => this.details = data)
+            .then(this.afterLogin)
+      }
+    },
+    afterLogin() {
+      if(this.details.message === 'failed'){
+        this.errorFieldLogin = true
+      }else {
+        sessionStorage.setItem('name', this.details.user.name)
+        sessionStorage.setItem('email', this.details.user.email)
+        sessionStorage.setItem('position', this.details.user.type)
+        sessionStorage.setItem('id', this.details.user.id);
+        this.$router.push('/')
       }
     }
   }

@@ -45,7 +45,7 @@
                   {{ row.email }}
                 </td>
                 <td class="py-3 px-6 text-center">
-                  {{ row.password }}
+                  Crypt
                 </td>
                 <td class="py-3 px-6 text-center">
                   {{ row.cin }}
@@ -150,7 +150,7 @@
         *
        </span></label>
 
-              <input v-model="secPassword" type="text" placeholder=""
+              <input v-model="secPassword" type="text" placeholder="Tapper new Password"
                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
             </div>
@@ -253,6 +253,7 @@ export default {
 
   mounted() {
     this.getSecretaryData()
+    this.checkPosition()
   },
   methods: {
     getSecretaryData() {
@@ -261,8 +262,6 @@ export default {
       }).then(res => res.json())
           .then(data => this.secretariesData = data)
     },
-
-
     editSecretary(secId) {
       this.appointments = ''
       this.function = 'edit'
@@ -279,7 +278,7 @@ export default {
           this.secFullName = item.name;
           this.secCin = item.cin;
           this.secEmail = item.email;
-          this.secPassword = item.password;
+
           this.secPhone = item.phone;
           this.secUserId = item.user_id
 
@@ -298,7 +297,7 @@ export default {
           this.secFullName = item.name;
           this.secEmail = item.email;
           this.secCin = item.cin;
-          this.secPassword = item.password;
+
           this.secPhone = item.phone;
           this.secUserId = item.user_id;
           this.secId = item.secr_id;
@@ -368,6 +367,11 @@ export default {
           this.getSecretaryData()
         }
       })
+    },
+    checkPosition() {
+      if (sessionStorage.getItem('position') === 'Secretary') {
+        this.$router.push('/')
+      }
     }
   }
 }

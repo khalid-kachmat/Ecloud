@@ -315,6 +315,13 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
     #appointmentForm{
         width: 100%;
     }
+
+    .form_control{
+        display: none;
+    }
+    .table_form{
+        width: 95%;
+    }
 }
 
 
@@ -398,6 +405,12 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
     #fullCalendar{
         width: 100%;
         margin: 0;
+    }
+    .form_control{
+        display: none;
+    }
+    .table_form{
+        width: 95%;
     }
 
 }

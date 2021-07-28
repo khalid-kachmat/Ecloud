@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -28,7 +29,7 @@ class DoctorController extends Controller
                 'docId' => $doc->doc_id,
                 'docFullName' => $info['name'],
                 'docEmail' => $info['email'],
-                'docPassword' => Crypt::decryptString($info['password']),
+                'docPassword' => $info['password'],
                 'docSpeciality' => $doc['doc_speciality'],
                 'docService' => $serve['service_name'],
                 'docUserId' => $info['id'],
@@ -52,7 +53,7 @@ class DoctorController extends Controller
             $usr = array(
                 'name' => $data['docFullName'],
                 'email' => $data['docEmail'],
-                'password' => Crypt::encryptString($data['docPassword']),
+                'password' => Hash::make($data['docPassword']),
                 'cin' => $data['docCin'],
                 'phone' => $data['docPhone'],
             );
@@ -62,7 +63,7 @@ class DoctorController extends Controller
             $usr = array(
                 'name' => $data['docFullName'],
                 'email' => $data['docEmail'],
-                'password' => Crypt::encryptString($data['docPassword']),
+                'password' => Hash::make($data['docPassword']),
                 'cin' => $data['docCin'],
                 'type' => $data['type'],
                 'phone' => $data['docPhone'],

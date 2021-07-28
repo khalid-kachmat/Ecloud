@@ -1,13 +1,14 @@
 <template>
 
 
-  <div class="flex">
-    <div class="ml-20 w-2/3 overflow-x-auto h-1/2  font-sans overflow-hidden ">
+  <div class="2xl:flex xl:block lg:block md:block">
+    <div
+        class="xl:ml-20 xl:w-2/3 lg:ml-10 lg:w-full md:w-4/5 md:ml-10 overflow-x-auto h-1/2  font-sans overflow-hidden ">
       <div class="w-full py-3 lg:w-5/6">
         <!--        -->
 
         <div>
-          <div class="relative mr-4 my-2 flex space-x-10 w-full	">
+          <div class="relative  mr-4 my-2 flex space-x-10 w-full	">
             <div class="flex justify-start w-1/2">
               <input type="search" v-model="search " class="bg-white shadow-lg rounded-xl  p-2 w-22 text-semibold"
                      placeholder="Search by name...">
@@ -24,8 +25,10 @@
               </button>
             </div>
           </div>
-          <div class=" table-bg rounded-xl  shadow-lg  my-6">
-            <table class="min-w-max w-full rounded-xl table-auto">
+          <div class="table_form table-bg rounded-xl  shadow-lg  my-6">
+
+
+            <table class="min-w-max w-full rounded-xl table-auto ">
               <thead>
               <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">Full Name</th>
@@ -45,7 +48,7 @@
                   {{ row.docEmail }}
                 </td>
                 <td class="py-3 px-6 text-center">
-                  {{ row.docPassword }}
+                  Crypt
                 </td>
                 <td class="py-3 px-6 text-center">
                   {{ row.docSpeciality }}
@@ -82,15 +85,17 @@
 
               </tbody>
             </table>
+
+
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="w-2/4 py-3  mr-10 flex mt-25 justify-center">
+    <div class="2xl:w-2/4 xl:w-2/4 md:w-full py-3  mr-10 flex mt-25 justify-center">
 
-      <div class="w-full ">
+      <div class="xl:w-full md:w-2/4 form_control">
         <div class="flex justify-center my-5 font-semibold text-gray-500 ">
 
           <h1 :class="displayVisibility ? 'hidden' : 'block'"><span>doctor Information</span></h1>
@@ -116,7 +121,7 @@
         *
        </span></label>
               <div class="flex items-center space-x-4">
-                <input  v-model="docEmail" type="email" name="birthDate"
+                <input v-model="docEmail" type="email" name="birthDate"
                        placeholder="admin@email.com"
                        class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
@@ -168,7 +173,7 @@
         *
        </span></label>
 
-              <input v-model="docPassword" type="text" placeholder=""
+              <input v-model="docPassword" type="text" placeholder="Enter New Password"
                      class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
 
             </div>
@@ -178,7 +183,7 @@
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
-                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
+                class="w-1/2 px-1 py-1 bg-gray-200 hover:text-black text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
               Save
             </button>
             <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
@@ -293,6 +298,7 @@ export default {
   mounted() {
     this.getDoctorData()
     this.fetchServicesData()
+    this.checkPosition()
   },
   methods: {
     getDoctorData() {
@@ -332,7 +338,6 @@ export default {
           this.docCin = item.docCin;
           this.docSpeciality = item.docSpeciality;
           this.docEmail = item.docEmail;
-          this.docPassword = item.docPassword;
           this.docPhone = item.docPhone;
           this.docUserId = item.docUserId
 
@@ -358,7 +363,6 @@ export default {
           this.docEmail = item.docEmail;
           this.docCin = item.docCin;
           this.docSpeciality = item.docSpeciality;
-          this.docPassword = item.docPassword;
           this.service = item.docService;
           this.docPhone = item.docPhone;
 
@@ -383,7 +387,7 @@ export default {
       this.displayFormVisibility = true
       this.displayVisibility = true;
       this.editVisibility = true
-      this.docFullName = this.docEmail = this.docPassword = this.docId =  this.serviceId = this.service = this.docCin = this.docPhone = this.docSpeciality = '';
+      this.docFullName = this.docEmail = this.docPassword = this.docId = this.serviceId = this.service = this.docCin = this.docPhone = this.docSpeciality = '';
     },
     sendDataIntoDataBase() {
       if (this.docFullName === '' || this.docEmail === '' || this.docCin === '' || this.docPassword === '' || this.docPhone === '' || this.assurance === '' || this.assuranceId === '') {
@@ -401,8 +405,8 @@ export default {
             docSpeciality: this.docSpeciality,
             docPhone: this.docPhone,
             docPassword: this.docPassword,
-            docUserId : this.docUserId,
-            type : this.type,
+            docUserId: this.docUserId,
+            type: this.type,
           })
         };
         fetch('http://127.0.0.1:8000/api/updateOrAddDoc', data);
@@ -435,11 +439,32 @@ export default {
           this.getDoctorData()
         }
       })
+    },
+    checkPosition() {
+      if (sessionStorage.getItem('position') === 'Secretary') {
+        this.$router.push('/')
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+@media (min-width: 640px) {
+  table {
+    display: inline-table !important;
+  }
 
+  thead tr:not(:first-child) {
+    display: none;
+  }
+}
+
+td:not(:last-child) {
+  border-bottom: 0;
+}
+
+th:not(:last-child) {
+  border-bottom: 2px solid rgba(0, 0, 0, .1);
+}
 </style>
