@@ -5,8 +5,8 @@
     </div>
     <div class="flex">
 
-      <div class=" w-2/3 overflow-x-auto h-1/2  font-sans overflow-hidden ">
-        <div class="w-full lg:w-5/6">
+      <div class="  xl:w-2/3 lg:w-full md:w-full md:text-sm w-full overflow-x-auto h-1/2 font-sans overflow-hidden ">
+        <div class="md:w-full sm:w-full lg:w-5/6">
 
           <div class="rounded-xl  border w-1/2 mx-auto my-4">
             <!-- Tabs -->

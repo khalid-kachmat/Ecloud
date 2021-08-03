@@ -77,15 +77,13 @@ export default {
         slotMaxTime: '18:00',
         slotDuration: '00:15:00',
         longPressDelay: 100,
-        eventColor: "#a9b1bb",
-        eventTextColor: 'black',
+        eventColor: "#6EE7B7",
+        eventTextColor: '#6B7280',
         height: "90vh",
-        themeSystem: "Minty",
 
         eventTimeFormat: { // like '14:30:00'
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           hour12: false
         },
 

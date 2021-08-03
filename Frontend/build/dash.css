@@ -2,17 +2,18 @@ main {
     position: relative;
     z-index: 1;
     width: auto;
-    background-color: rgb(243, 243, 243);
+    /*F3F3F3FF*/
+    background-color: #F3F4F6;
     margin-left: 8rem;
     border-radius: 40px 40px 40px;
     overflow-x: hidden;
 }
 .bg{
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(255, 255, 255);
 }
 .navbar {
     opacity: 1;
-    background-color: rgb(209, 213, 219);
+    background-color: rgb(101, 221, 156);
     width: 20rem;
     height: 100vh;
     position: fixed;
@@ -54,7 +55,7 @@ main {
     align-items: center;
     height: 5rem;
     text-decoration: none;
-    color: black;
+    color: #ffffff;
 }
 
 .nav-link svg {
@@ -121,13 +122,22 @@ h1 {
 }
 
 h1 span {
-    background: #F3F3F3FF;
+    background: #f3f4f6;
     padding: 5px 20px;
     border-radius: 12px;
 
 
 }
-
+.inp{
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1rem 1rem;
+    background-color: white;
+    --tw-border-opacity: 1;
+    border-color: rgba(52, 211, 153, var(--tw-border-opacity));
+    border-bottom-width: 4px;
+    border-radius: 0.375rem;
+}
 
 .table-bg {
     background-color: #F2F2F2;
@@ -166,49 +176,26 @@ tbody{
 }
 
 button.fc-prev-button.fc-button.fc-button-primary {
-    background-color: #718096;border-radius: 10px;
+    background-color: #65dd9c;border-radius: 10px;
 }
 button.fc-next-button.fc-button.fc-button-primary{
-    background-color: #718096;border-radius: 10px;
+    background-color: #65dd9c;border-radius: 10px;
 }
 button.fc-today-button.fc-button.fc-button-primary{
-    background-color: #718096;border-radius: 10px;
+    background-color: #65dd9c;border-radius: 10px;
 }
 button.fc-dayGridMonth-button.fc-button.fc-button-primary {
-    background-color: #718096;border-radius: 10px;
+    background-color: #65dd9c;border-radius: 10px;
 }
 button.fc-timeGridWeek-button.fc-button.fc-button-primary {
-    background-color: #718096;
+    background-color: #65dd9c;
 }
 
 button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
-    background-color: #718096;
+    background-color: #65dd9c;
     border-radius: 0 10px 10px 0;
 }
-.tooltip{
-    position: absolute;
-    left: 53px;
-    top: 159px;
-    transform: translateX(-45%);
-    height: 35px;
-    width: 90px;
-    margin: 0 5px;
-    list-style: none;
-    line-height: 35px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: black;
-    /*pointer-events: none;*/
-    opacity: 0;
-    transition:all 0.5s ease;
-}
-.tooltip:hover {
 
-    opacity: 1;
-    transition: all 0.6s ease;
-}
 
 .inp {
     border:none;
@@ -316,13 +303,17 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
         width: 100%;
     }
 
-    .form_control{
-        display: none;
-    }
+
     .table_form{
         width: 95%;
     }
 }
+@media only screen and (max-width: 425px) {
+    .table_hide{
+        display: none;
+    }
+}
+
 
 
 @media only screen and (max-width: 640px) {
@@ -411,6 +402,9 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
     }
     .table_form{
         width: 95%;
+    }
+    .table_hide{
+        display: none;
     }
 
 }

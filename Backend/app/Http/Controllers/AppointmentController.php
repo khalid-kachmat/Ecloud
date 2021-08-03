@@ -76,7 +76,7 @@ class AppointmentController extends Controller
 
             $data = array(
                 'id' => $row['slot_app_id'],
-                'title' => $patients['patient_first_name'] . ' ' . $patients['patient_last_name'] . ' ' . ' __ ' . 'Doctor: ' . $usr->name,
+                'title' => $patients['patient_first_name'] . ' ' . $patients['patient_last_name'] . ' ' . '- ' . 'Doctor: ' . $usr->name,
                 'start' => $row['start'],
                 'end' => $row['end']
             );

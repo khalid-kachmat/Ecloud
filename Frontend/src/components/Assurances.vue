@@ -27,7 +27,7 @@
           <div class=" table-bg rounded-xl  shadow-lg  my-6">
             <table class="min-w-max w-full rounded-xl table-auto">
               <thead>
-              <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <tr class="bg-green-200 text-gray-600 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">assurance Name</th>
                 <th class="py-3 px-6 text-center">Actions</th>
               </tr>
@@ -98,7 +98,7 @@
         *
        </span></label>
               <input v-model="assuranceName" type="text" name="firstName" placeholder="Enter assurance Name"
-                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
             <input name="assurance_id" hidden v-model="assuranceId">
 
@@ -112,7 +112,7 @@
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
-                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
+                class="w-1/2 px-1 py-1 bg-green-300 hover:text-black text-white font-bold transition ease-in-out duration-700 rounded-xl shadow-md">
               Save
             </button>
             <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
@@ -127,7 +127,7 @@
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Assurance Name</label>
               <input v-model="assuranceName" type="text" readonly
-                     class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
 
 

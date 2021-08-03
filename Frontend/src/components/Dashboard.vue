@@ -2,7 +2,7 @@
 
 
   <div>
-    <nav class="navbar bg-gray-300">
+    <nav class="navbar ">
       <ul class="navbar-nav">
         <li class="logo">
           <a href="" class="nav-link">
@@ -31,7 +31,6 @@
 
         </a>
         </li>
-        <span class="tooltip">GALLERY</span>
         <li class="nav-item"><a href="/patients" class="nav-link">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

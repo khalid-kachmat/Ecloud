@@ -4,18 +4,17 @@
       <h1><span>User information</span></h1>
     </div>
     <div class="flex">
-
-      <div class=" xl:w-2/3 md:w-full overflow-x-auto h-1/2  font-sans overflow-hidden ">
-        <div class="md:w-full lg:w-5/6">
+      <div class=" xl:w-2/3 lg:w-full md:w-full md:text-sm w-full overflow-x-auto h-1/2 font-sans overflow-hidden ">
+        <div class="md:w-full sm:w-full lg:w-5/6">
 
           <div class="rounded-xl  border w-1/2 mx-auto my-4">
             <!-- Tabs -->
             <ul id="tabs" class="inline-flex bg-gray-200 pt-2 px-1 w-full rounded-xl">
               <li id="Doctors"
                   class=" bg-gray-100 cursor-pointer px-4 text-gray-800 font-semibold py-2 rounded-xl border-t border-r border-l -mb-px">
-                <a  @click="tabChange('Doctors')">Doctors</a></li>
+                <a @click="tabChange('Doctors')">Doctors</a></li>
               <li id="Secretaries" class="cursor-pointer px-4 text-gray-800 font-semibold py-2 rounded-xl"><a
-                  @click="tabChange('Secretaries')" >Secretaries</a></li>
+                  @click="tabChange('Secretaries')">Secretaries</a></li>
             </ul>
           </div>
           <!-- endTabs-->
@@ -34,6 +33,7 @@
 
 import Doctors from "@/components/Doctors";
 import Secretaries from "@/components/Secretaries";
+
 export default {
   components: {
     Doctors,
@@ -52,10 +52,10 @@ export default {
       this.content = component
       let doc = document.querySelector('#Doctors');
       let sec = document.querySelector('#Secretaries')
-      if (component === 'Secretaries'){
+      if (component === 'Secretaries') {
         doc.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-gray-100");
         sec.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-gray-100")
-      }else {
+      } else {
         doc.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-gray-100");
         sec.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-gray-100")
       }

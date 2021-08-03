@@ -1,18 +1,18 @@
 <template>
 
 
-  <div class="flex">
-    <div class="ml-20 w-2/3 overflow-x-auto h-1/2  font-sans overflow-hidden ">
+  <div class="2xl:flex xl:block lg:block md:block">
+    <div class="xl:ml-20 xl:w-full lg:ml-10 lg:w-full md:w-11/12 md:ml-10 overflow-x-auto h-1/2  font-sans overflow-hidden">
       <div class="w-full py-3 lg:w-5/6">
         <!--        -->
 
         <div>
           <div class="relative mr-4 my-2 flex space-x-10 w-full	">
-            <div class="flex justify-start w-1/2">
+            <div class="flex 2xl:justify-start xl:justify-start lg:justify-start justify-center w-1/2">
               <input type="search" v-model="search " class="bg-white shadow-lg rounded-xl  p-2 w-22 text-semibold"
                      placeholder="Search by name...">
             </div>
-            <div class="flex justify-end w-1/2	">
+            <div class="2xl:flex xl:flex lg:flex md:hidden hidden justify-end w-1/2	">
               <button @click="addNewSecretary"
                       class=" flex item-center gap-2 w-30 px-8 py-2  bg-white hover:border-white shadow-lg rounded-xl hover:text-black text-gray-400 font-bold transition ease-in-out duration-700 ">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -27,12 +27,12 @@
           <div class=" table-bg rounded-xl  shadow-lg  my-6">
             <table class="min-w-max w-full rounded-xl table-auto">
               <thead>
-              <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <tr class="bg-green-200 text-gray-600 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">Full Name</th>
                 <th class="py-3 px-6 text-left">Email</th>
-                <th class="py-3 px-6 text-center">Password</th>
-                <th class="py-3 px-6 text-center">Cin</th>
-                <th class="py-3 px-6 text-center">Actions</th>
+                <th class="py-3 px-6 text-center table_hide">Password</th>
+                <th class="py-3 px-6 text-center table_hide">Cin</th>
+                <th class="py-3 px-6 text-center table_hide">Actions</th>
               </tr>
               </thead>
               <tbody v-for="(row) in  filter" :key="row.secr_id"
@@ -44,13 +44,13 @@
                 <td class="py-3 px-6 text-left">
                   {{ row.email }}
                 </td>
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-6 text-center table_hide">
                   Crypt
                 </td>
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-6 text-center table_hide">
                   {{ row.cin }}
                 </td>
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-6 text-center table_hide">
                   <div class="flex item-center justify-center">
                     <div class="w-4 mr-2 cursor-pointer transform hover:text-purple-500 hover:scale-110">
                       <svg @click="displaySecretary(row.secr_id)" xmlns="http://www.w3.org/2000/svg"
@@ -88,9 +88,9 @@
       </div>
     </div>
 
-    <div class="w-2/4 py-3  mr-10 flex mt-25 justify-center">
+    <div class="2xl:w-11/12 xl:w-11/12 lg:w-full md:w-full py-3  mr-10 flex mt-25 justify-center">
 
-      <div class="w-full ">
+      <div class="2xl:w-full xl:full md:w-2/4 lg:w-2/4 form_control">
         <div class="flex justify-center my-5 font-semibold text-gray-500 ">
 
           <h1 :class="displayVisibility ? 'hidden' : 'block'"><span>secretary Information</span></h1>
@@ -107,7 +107,7 @@
         *
        </span></label>
               <input v-model="secFullName" type="text" name="firstName" placeholder="Enter First Name"
-                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
             <input name="secretary_id" hidden v-model="secId">
             <input name="assurance_id" hidden v-model="secUserId">
@@ -118,7 +118,7 @@
               <div class="flex items-center space-x-4">
                 <input  v-model="secEmail" type="email" name="birthDate"
                         placeholder="admin@email.com"
-                        class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                        class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
 
               </div>
             </div>
@@ -131,7 +131,7 @@
         *
        </span></label>
               <input v-model="secPhone" type="text" placeholder="0666666666"
-                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Cin<span class="text-red-500">
@@ -139,7 +139,7 @@
        </span></label>
 
               <input v-model="secCin" type="text" placeholder="Y563433"
-                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
 
             </div>
           </div>
@@ -151,7 +151,7 @@
        </span></label>
 
               <input v-model="secPassword" type="text" placeholder="Tapper new Password"
-                     class="px-4 py-2  w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
 
             </div>
 
@@ -160,7 +160,7 @@
           <div class="flex flex-col my-4 items-center justify-center w-full">
             <button
                 type="submit"
-                class="w-1/2 px-1 py-1    bg-gray-200 hover:text-black  text-gray-500 font-bold transition ease-in-out duration-700  rounded-xl shadow-md ">
+                class="w-1/2 px-1 py-1 bg-green-300 hover:text-black text-white font-bold transition ease-in-out duration-700 rounded-xl shadow-md ">
               Save
             </button>
             <span class="m-4 text-red-500" v-show="errorField">{{ error }}</span>
@@ -175,14 +175,14 @@
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Full Name</label>
               <input v-model="secFullName" type="text" readonly
-                     class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
 
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Email</label>
               <div class="flex items-center space-x-4">
                 <input readonly v-model="secEmail" type="text"
-                       class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                       class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
 
               </div>
             </div>
@@ -194,13 +194,13 @@
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Phone</label>
               <input v-model="secPhone" type="text" readonly
-                     class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
             </div>
             <div class="flex w-1/2 flex-col justify-center">
               <label class="leading-loose font-semibold ">Cin</label>
 
               <input v-model="secCin" type="text" readonly
-                     class="px-4 py-2 cursor-default w-2/3 sm:text-sm bg-gray-200 shadow-md focus:outline-none rounded-md ">
+                     class="border-gray-200 border-2 px-4 py-2  w-2/3 sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-200 shadow-sm transition duration-200  pb-3 rounded-md">
 
             </div>
           </div>

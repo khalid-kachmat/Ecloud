@@ -7,7 +7,7 @@
     <section class="text-gray-600 body-font">
       <div class="container px-5 py-8 mx-auto">
         <div class="flex flex-wrap  text-center">
-          <div class="p-4 sm:w-1/4 w-1/2">
+          <div class="p-4 sm:w-1/4 w-1/2 ">
 
             <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">{{ statistic.appointments }}</h2>
             <p class="leading-relaxed">Total Appointments</p>
@@ -100,7 +100,7 @@ export default {
         slotMaxTime: '18:00',
         slotDuration: '00:15:00',
         longPressDelay: 100,
-        eventColor: "#a9b1bb",
+        eventColor: "#6EE7B7",
         eventTextColor: 'black',
         height: "72vh",
         themeSystem: "Minty",
@@ -108,7 +108,6 @@ export default {
         eventTimeFormat: { // like '14:30:00'
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           hour12: false
         },
 
@@ -209,7 +208,7 @@ export default {
     },
     statistics() {
       let today = (new Date).toISOString().slice(0, 10)
-      fetch('http://127.0.0.1:8000/api/statistics',{
+      fetch('http://127.0.0.1:8000/api/statistics', {
         method: 'Post',
         body: today
       })
