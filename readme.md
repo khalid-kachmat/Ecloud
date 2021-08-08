@@ -4,39 +4,39 @@
 
 
 
-#Product definition
+# Product definition
 
 The project in general is a local web application that would replace traditional methods of booking appointments inside medical offices. The platform allows secretaries to manage patients and book appointments, and to easily organize schedules.
 
-#Technical architecture
+# Technical architecture
 
-###LARAVEL
+### LARAVEL
 
 ![plugin](readmePics/laravel.png)
 
-###Vue js
+### Vue js
 
 ![plugin](readmePics/vuejs.png)
 
-###mySQL
+### mySQL
 
 ![plugin](readmePics/mysql.png)
 
 # Screenshots from the application
 
-###LoginPage
+### LoginPage
 
 ![plugin](readmePics/loginPage.PNG)
 
-###HomePage
+### HomePage
 
 ![plugin](readmePics/homePage.PNG)
 
-###Appointments
+### Appointments
 
 ![plugin](readmePics/calendarPage.PNG)
 
-###Patients management Page
+### Patients management Page
 
 ![plugin](readmePics/patient.PNG)
 
