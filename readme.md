@@ -2,6 +2,8 @@
 <br>
 <br>
 
+
+
 #Product definition
 
 The project in general is a local web application that would replace traditional methods of booking appointments inside medical offices. The platform allows secretaries to manage patients and book appointments, and to easily organize schedules.
