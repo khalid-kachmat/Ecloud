@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class Slots extends Model
@@ -16,7 +17,7 @@ class Slots extends Model
             ->insert($data);
     }
 
-    public function getSlotsForAppointment(): \Illuminate\Support\Collection
+    public function getSlotsForAppointment(): Collection
     {
         return Slots::all();
     }

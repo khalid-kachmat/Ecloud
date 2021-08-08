@@ -1,7 +1,8 @@
 <template>
   <div class="py-40 bg h-screen">
-    <div class="max-w-lg m-auto w-full text-gray-500 p-8 md:p-12 rounded-xl shadow-2xl bg-green-200">
-      <section>
+    <div class=" max-w-lg m-auto w-full text-gray-500 p-8 md:p-12 rounded-xl shadow-2xl bg-green-300">
+      <section class="flex flex-col justify-center w-full">
+        <img src="../assets/logoLogin.svg" class="w-32 ml-36" alt="">
         <h3 class="font-karla text-2xl font-semibold  text-center tracking-wider">Welcome to ECloud</h3>
         <p class=" pt-2 font-semibold text-center">Sign in to your account.</p>
       </section>

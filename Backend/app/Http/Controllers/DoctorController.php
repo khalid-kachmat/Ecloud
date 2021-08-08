@@ -82,7 +82,7 @@ class DoctorController extends Controller
 
     public function deleteDoctor(Request $request, Doctor $doctor, User $user)
     {
-        $data = json_decode($request->getContent() , true);
+        $data = json_decode($request->getContent(), true);
         $user->deleteUser($data['docUserId']);
         $doctor->deleteDoctor($data['docId']);
     }

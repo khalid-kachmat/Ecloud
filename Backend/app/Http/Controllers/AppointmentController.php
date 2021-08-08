@@ -69,7 +69,7 @@ class AppointmentController extends Controller
         $test = $slots->getSlotsForAppointment();
         $result = array();
         foreach ($test as $row) {
-            $appointments = $appointment->getPatientId($row['slot_app_id']);
+            $appointments = $appointment->getAppointmentBytId($row['slot_app_id']);
             $patients = $patient->getPatientById($appointments['app_patient_id']);
             $doc = $doctor->all()->where('doc_id', '=', $appointments['app_doc_id'])->first();
             $usr = $user->all()->where('id', '=', $doc->doc_user_id)->first();

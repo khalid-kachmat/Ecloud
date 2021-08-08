@@ -27,7 +27,7 @@ class Appointment extends Model
             ->get();
     }
 
-    public function getPatientId($id)
+    public function getAppointmentBytId($id)
     {
         return Appointment::all()->where('app_id', '=', $id)->first();
     }
