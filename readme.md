@@ -1,4 +1,4 @@
-## ![plugin](readmePics/appLogo.PNG)
+![plugin](readmePics/appLogo.png)
 <br>
 <br>
 
