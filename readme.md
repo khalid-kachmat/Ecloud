@@ -22,6 +22,9 @@ The project in general is a local web application that would replace traditional
 
 ![plugin](readmePics/mysql.png)
 
+# ProtoType
+## <a href = "https://www.figma.com/file/q4ttuQ4DDdVPpGpQcmgo74/medical-cabinet-appointment?node-id=0%3A1">Proto
+
 # Screenshots from the application
 
 ### LoginPage
